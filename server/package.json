@@ -1,0 +1,26 @@
+{
+  "name": "tasks2do-backend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "apollo-server": "^2.4.8",
+    "apollo-server-express": "^2.4.8",
+    "esm": "^3.2.22",
+    "express": "^4.16.4",
+    "graphql": "^14.2.1",
+    "mongoose": "^5.5.2"
+  },
+  "scripts": {
+    "server": "nodemon -r esm server.js"
+  },
+  "author": "William Crutchfield",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "nodemon": "^1.18.11"
+  }
+}
