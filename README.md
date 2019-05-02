@@ -2,7 +2,12 @@
 
 www.tasks2do.com
 
+---
+
+## Table of Contents
+
 ## File Structure
+
 ```bash
 tasks2do
 ├── client
@@ -26,16 +31,22 @@ tasks2do
 |   └── README.md           # Client README
 |
 ├── server
-|   ├── config              # Config Files
-|   |   └── database.js     # DB Info
 |   ├── node_modules        # Dependencies
 |   |   └──
+|   ├── src                 # Apollo/Express Server
+|   |   ├── models          # Mongoose Models
+|   |   |   └──
+|   |   ├── resolvers       # GraphQL Resolvers
+|   |   |   └──
+|   |   ├── typeDefs        # GraphQL Type Definitions
+|   |   |   └──
+|   |   ├── config.js       # DB Configurations (see Server README)
+|   |   └── index.js
 |   ├── .eslintrc           # Linting
 |   ├── .gitignore          # server .gitignore
-|   ├── apollo.config       # Apollo configuration
-|   ├── nodemon.json        # DB ENV Variables (see './config/database.js')
 |   ├── package-lock.json   # Node Dependency Packages
 |   ├── package.json        # Node Package
+|   └── README.md           # Server README
 |
 ├── .gitignore              # Global .gitignore
 └── README.md               # Global README
