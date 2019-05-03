@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
     this.updateTheme = this.updateTheme.bind(this);
     this.state = {
-      themeName: '',
+      themeName: 'dark',
     };
   }
 
@@ -27,6 +27,10 @@ class App extends Component {
     this.updateTheme(this.state.themeName);
   }
 
+  // Update's App overall theme.
+  //
+  // Call this function with a theme name as an argument.
+  // Ex: this.updateTheme('light'); or this.updateTheme('dark');
   updateTheme(newThemeName) {
     const { themePrefix } = this.props;
     const { themeName } = this.state;

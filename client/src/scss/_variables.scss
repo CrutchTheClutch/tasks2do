@@ -1,9 +1,29 @@
 // App
 //
 // Global App settings.
-
+$app-min-height:                                    100%;
 $app-min-width:                                     250px;
 $app-headings-font-weigth:                          400;
+
+// Navbar
+// 
+// Navbar settings.
+$navbar-min-height:                                 3.5em;
+$navbar-padding:                                    calc(#{$navbar-min-height} / 4.8);
+
+$navbar-fa-font-size:                               calc(#{$navbar-min-height} / 1.84);
+$navbar-fa-margin-right:                            0.25em;
+
+$navbar-brandName-font-size:                        calc(#{$navbar-fa-font-size} / 1.25);
+$navbar-brandName-line-height:                      1;
+
+// Footer
+// 
+// Footer settings.
+$footer-min-height:                                 2.75em;
+$footer-padding:                                    calc(#{$footer-min-height} / 4.8);
+
+$footer-fa-font-size:                               calc(#{$footer-min-height} / 1.84);
 
 // Theme Variables
 // 
@@ -12,10 +32,50 @@ $app-headings-font-weigth:                          400;
 // should share the same variables, to allow for a consistent look across multiple themes. Lastly,
 // theme variables should only conisit of color-related variables.
 
+// Convert light/dark theme with these tools:
+// 1. http://www.mattlag.com/scripting/hexcolorinverter.php
+// 2. https://www.color-hex.com
+
+// Global Theme Colors
+$light:                                             rgba(232, 228, 224, 1);
+$grey-100:                                          rgba(210, 208, 204, 1);
+$grey-900:                                          rgba(55, 57, 61, 1);
+$dark:                                              rgba(33, 37, 41, 1);
+
+
 // Light Theme
-$light-app-bg:                                      rgba(255, 255, 255, 1);
-$light-app-color:                                   rgba(33, 37, 41, 1);
+// 
+// 
+// Global App Colors
+$light-app-bg:                                      $light;
+$light-app-text-color:                              $dark;
+
+// Links
+$light-app-link-color:                              lighten($light-app-text-color, 25%);
+$light-app-link-color-hover:                        $light-app-text-color;
+
+// Navbar Colors
+$light-navbar-bg:                                   $grey-100;
+
+// Footer Colors
+$light-footer-bg:                                   darken($light-navbar-bg, 10%);
+$light-footer-text-color:                           darken($light-app-text-color, 25%);
+
 
 // Dark Theme
-$dark-app-bg:                                       rgba(33, 37, 41, 1);
-$dark-app-color:                                    rgba(255, 255, 255, 1);
+// 
+// 
+// Global App Colors
+$dark-app-bg:                                       $dark;
+$dark-app-text-color:                               $light;
+
+// Links
+$dark-app-link-color:                               darken($dark-app-text-color, 25%);
+$dark-app-link-color-hover:                         $dark-app-text-color;
+
+// Navbar Colors
+$dark-navbar-bg:                                    $grey-900;
+
+// Footer Colors
+$dark-footer-bg:                                    darken($dark-navbar-bg, 10%);
+$dark-footer-text-color:                            darken($dark-app-text-color, 25%);

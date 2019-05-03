@@ -2,10 +2,13 @@
 @import "../node_modules/bootstrap/scss/grid.scss";
 @import "../node_modules/bootstrap/scss/utilities.scss";
 
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
 @import "./scss/variables.scss";
 
 html, body, #root, #app-root {
-    height:                                         100%;
-    min-height:                                     100%;
+    height:                                         $app-min-height;
+    min-height:                                     $app-min-height;
     min-width:                                      $app-min-width !important;
 }

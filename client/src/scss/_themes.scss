@@ -7,11 +7,35 @@
 
  $themes: (
   light: (
+    // Global App Colors
     app-bg:                                         $light-app-bg,
-    app-color:                                      $light-app-color,
+    app-text-color:                                 $light-app-text-color,
+
+    // Links
+    app-link-color:                                 $light-app-link-color,
+    app-link-hover-color:                           $light-app-link-color-hover,
+    
+    // Navbar Colors
+    navbar-bg:                                      $light-navbar-bg,
+
+    // Footer Colors
+    footer-bg:                                      $light-footer-bg,
+    footer-text-color:                              $light-footer-text-color,
   ),
   dark: (
-    app-color:                                      $dark-app-color,
+    // Global App Colors
     app-bg:                                         $dark-app-bg,
+    app-text-color:                                 $dark-app-text-color,
+
+    // Links
+    app-link-color:                                 $dark-app-link-color,
+    app-link-hover-color:                           $dark-app-link-color-hover,
+
+    // Navbar Colors
+    navbar-bg:                                      $dark-navbar-bg,
+
+    // Footer Colors
+    footer-bg:                                      $dark-footer-bg,
+    footer-text-color:                              $dark-footer-text-color,
   ),
 );
