@@ -1,0 +1,17 @@
+@import "./mixins/theme.scss";
+@import "./variables.scss";
+
+// Theme System
+//
+// Color system for various App themes.
+
+ $themes: (
+  light: (
+    app-bg:                                         $light-app-bg,
+    app-color:                                      $light-app-color,
+  ),
+  dark: (
+    app-color:                                      $dark-app-color,
+    app-bg:                                         $dark-app-bg,
+  ),
+);

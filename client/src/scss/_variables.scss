@@ -1,0 +1,21 @@
+// App
+//
+// Global App settings.
+
+$app-min-width:                                     250px;
+$app-headings-font-weigth:                          400;
+
+// Theme Variables
+// 
+// Theme Variables should follow the `$theme-component-state-property` formula for consistent
+// variable naming.  Ex: $dark-nav-link-disabled-color and $light-modal-content-box-bg.  Each theme
+// should share the same variables, to allow for a consistent look across multiple themes. Lastly,
+// theme variables should only conisit of color-related variables.
+
+// Light Theme
+$light-app-bg:                                      rgba(255, 255, 255, 1);
+$light-app-color:                                   rgba(33, 37, 41, 1);
+
+// Dark Theme
+$dark-app-bg:                                       rgba(33, 37, 41, 1);
+$dark-app-color:                                    rgba(255, 255, 255, 1);
