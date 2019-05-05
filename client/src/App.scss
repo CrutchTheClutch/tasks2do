@@ -30,6 +30,9 @@
   }
 
   .icon {
-    vertical-align: middle;
+    font-size:                                      $icon-font-size;
+    min-height:                                     $icon-font-size;
+    min-width:                                      $icon-font-size;
+    vertical-align:                                 middle;
   }
 }

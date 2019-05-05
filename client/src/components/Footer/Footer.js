@@ -1,4 +1,5 @@
 import React from 'react';
+import { IoLogoGithub } from 'react-icons/io';
 
 import './Footer.scss';
 
@@ -10,7 +11,7 @@ const Footer = () => (
       </div>
       <div className="col text-right my-auto">
         <a href="https://github.com/CrutchTheClutch/tasks2do">
-          <i className="fa fa-github" />
+          <IoLogoGithub className="icon" />
         </a>
       </div>
     </div>

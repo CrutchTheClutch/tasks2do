@@ -2,8 +2,10 @@
 //
 // Global App settings.
 $app-min-height:                                    100%;
-$app-min-width:                                     250px;
+$app-min-width:                                     265px;
 $app-headings-font-weigth:                          400;
+$app-button-horizontal-gap:                         0.5em;
+$icon-font-size:                                    1.1em;
 $link-color-transition:                             color 0s,
                                                     background-color 0s,
                                                     border-color 0s,
@@ -43,6 +45,7 @@ $footer-fa-font-size:                               calc(#{$footer-min-height} /
 
 // Brand Colors
 $brand-primary:                                     rgb(8, 170, 220);
+$brand-nightMode:                                   rgb(220, 163, 8);
 
 // Global Theme Colors
 $light:                                             rgba(232, 228, 224, 1);

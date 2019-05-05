@@ -1,0 +1,33 @@
+@import "../../scss/themes";
+
+.customButton {
+  @include theme($themes) {
+    color:                                          rgba(themed('app-text-color'), .75);
+  }
+
+  &.transparentButton {
+    @include theme($themes) {
+      background-color:                             rgba(themed('app-text-color'), 0);
+    }
+
+    &:hover {
+      @include theme($themes) {
+        color:                                        $brand-primary;
+        background-color:                             rgba(themed('app-text-color'), .125);
+      }
+    }
+  }
+
+  .icon {
+    // Fixes alignment issue with react-icons + bootstrap
+    margin-bottom:                                  3px;
+  }
+
+  + .customButton {
+    margin-left:                                    $app-button-horizontal-gap
+  }
+
+  .nightMode {
+    color:                                          $brand-nightMode;
+  }
+}

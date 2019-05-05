@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './App.scss';
@@ -20,7 +20,8 @@ class App extends Component {
     super(props);
     this.updateTheme = this.updateTheme.bind(this);
     this.state = {
-      themeName: 'dark',
+      nightMode: true,
+      themeName: 'light',
     };
   }
 
@@ -34,7 +35,7 @@ class App extends Component {
   // Ex: this.updateTheme('light'); or this.updateTheme('dark');
   updateTheme(newThemeName) {
     const { themePrefix } = this.props;
-    const { themeName } = this.state;
+    const { nightMode, themeName } = this.state;
 
     const root = document.getElementById('root');
 
@@ -48,15 +49,18 @@ class App extends Component {
     if (newThemeName) {
       this.setState({
         themeName: newThemeName,
+        nightMode: !nightMode,
       });
       root.classList.add(`${newTheme}`);
     }
   }
 
   render() {
+    const { nightMode } = this.state;
+
     return (
       <main id="app-root" className="d-flex flex-column">
-        <Navbar />
+        <Navbar nightMode={nightMode} updateTheme={this.updateTheme} />
         <div className="p-0 flex-grow-1">
           {/* <h1 className="title">Light theme</h1>
           <button
