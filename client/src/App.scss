@@ -13,12 +13,23 @@
 
     & :hover {
       @include theme($themes) {
-        color:                                        themed('app-link-hover-color');
+        color:                                      themed('app-link-hover-color');
       }
     }
   }
 
+  a, .btn, .fa {
+    transition:                                     $link-color-transition;
+    -o-transition:                                  $link-color-transition;
+    -moz-transition:                                $link-color-transition;
+    -webkit-transition:                             $link-color-transition;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-weight:                                    $app-headings-font-weigth;
+  }
+
+  .icon {
+    vertical-align: middle;
   }
 }
