@@ -35,7 +35,7 @@ class Navbar extends Component {
   render() {
     const { nightMode } = this.props;
     return (
-      <div className="navbar">
+      <div className="navbar align-items-center">
         <div className="col-7 col-sm-3 col-md-3 p-0">
           <div className="logo">
             <FaTasks className="icon" />

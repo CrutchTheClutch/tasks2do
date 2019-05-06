@@ -6,7 +6,7 @@ import './CustomButton.scss';
 const propTypes = {
   className: PropTypes.oneOf([
     'transparentButton',
-    'test',
+    'completed',
   ]).isRequired,
   content: PropTypes.oneOfType([
     PropTypes.object,
@@ -18,7 +18,6 @@ const propTypes = {
 const defaultProps = {
   onClick: () => {},
 };
-
 
 class CustomButton extends Component {
   constructor(props) {

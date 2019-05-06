@@ -3,6 +3,7 @@
 // Global App settings.
 $app-min-height:                                    100%;
 $app-min-width:                                     265px;
+$app-line-height:                                   1;
 $app-headings-font-weigth:                          400;
 $app-button-horizontal-gap:                         0.5em;
 $icon-font-size:                                    1.1em;
@@ -23,6 +24,23 @@ $navbar-icon-margin-right:                          0.25em;
 $navbar-brandName-font-size:                        calc(#{$navbar-icon-font-size} / 1.25);
 $navbar-brandName-line-height:                      1em;
 $navbar-brandName-margin-bottom:                    0.125em;
+
+// Custom Button
+//
+// Custom Button settings.
+
+// Completed Button
+$custom-button-completed-padding:                   0;
+$custom-button-completed-focus-outline:             none;
+
+// Task
+//
+// Task settings.
+$task-min-height:                                   3em;
+$task-col-inner-margin:                             1em;
+$task-border-bottom:                                1px solid;
+$task-done-opacity:                                 0.3;
+$task-date-font-size:                               0.775em;
 
 // Footer
 // 

@@ -11,10 +11,20 @@
     }
 
     &:hover {
+      color:                                        $brand-primary;
+
       @include theme($themes) {
-        color:                                        $brand-primary;
-        background-color:                             rgba(themed('app-text-color'), .125);
+        background-color:                           rgba(themed('app-text-color'), .125);
       }
+    }
+  }
+
+  &.completed {
+    padding:                                        $custom-button-completed-padding;
+    box-shadow:                                     $custom-button-completed-focus-outline;
+
+    &:hover {
+      color:                                        $brand-primary;
     }
   }
 

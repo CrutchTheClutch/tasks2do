@@ -4,7 +4,7 @@ import { IoLogoGithub } from 'react-icons/io';
 import './Footer.scss';
 
 const Footer = () => (
-  <div className="footer container-fluid">
+  <div className="footer container-fluid align-items-center">
     <div className="row no-gutters">
       <div className="col-10 text-left my-auto">
         {'This project was developed for CMST 488 at UMUC'}
