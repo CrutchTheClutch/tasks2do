@@ -1,0 +1,27 @@
+@import "../../scss/themes";
+
+.navbar {
+  min-height:                                       $navbar-min-height;
+  padding:                                          $navbar-padding;
+
+  @include theme($themes) {
+    background-color:                               themed('navbar-bg');
+  }
+
+  .logo  {
+    .icon {
+      font-size:                                    $navbar-icon-font-size;
+      margin-right:                                 $navbar-icon-margin-right;
+    }
+  
+    .brandName {
+      font-size:                                    $navbar-brandName-font-size;
+      line-height:                                  $navbar-brandName-line-height;
+      margin-bottom:                                $navbar-brandName-margin-bottom;
+    }
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
