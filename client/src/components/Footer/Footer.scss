@@ -1,0 +1,14 @@
+@import "../../scss/themes";
+
+.footer {
+  min-height:                                       $footer-min-height;
+  padding:                                          $footer-padding;
+
+  @include theme($themes) {
+    background-color:                               themed('footer-bg');
+  }
+  
+  .fa {
+    font-size:                                      $footer-fa-font-size;
+  }
+}

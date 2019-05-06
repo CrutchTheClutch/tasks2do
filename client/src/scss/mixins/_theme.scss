@@ -1,0 +1,24 @@
+// Theme Mixin
+// 
+// This mixin will apply the app's currently selected theme to an element.
+@mixin theme($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value:     map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+// Themed Function
+// 
+// Helper method for the Theme Mixin. The function will apply a specific color from the app's 
+// currently selected theme.
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
