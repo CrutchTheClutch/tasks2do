@@ -11,11 +11,11 @@ branches:
   - ci-cd
 jobs:
   include:
-    - stage: frontend unit tests
+    - stage: Frontend Unit Tests
       before_install: cd client
       install: npm install
       script: npm test
-    - stage: backend unit tests
+    - stage: Backend Unit Tests
       before_install: cd server
       install: npm install
       script: npm test
