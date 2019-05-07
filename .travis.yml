@@ -8,17 +8,13 @@ cache:
   directories:
     - client/node_modules
     - server/node_modules
+env:
+  - DIR=client
+  - DIR=server
 script: 'true'
 branches:
   only:
   - ci-cd
-jobs:
-  include:
-    - stage: Frontend Unit Tests
-      before_install: cd client
-      install: npm install
-      script: npm test
-    - stage: Backend Unit Tests
-      before_install: cd server
-      install: npm install
-      script: npm test
+before_install: cd $DIR
+install: npm install
+script: npm test
