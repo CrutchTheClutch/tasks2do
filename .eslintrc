@@ -11,6 +11,9 @@
     // Define globals exposed by Node.js.
     "node": true,
 
+    // Define globals exposed by Jest
+    "jest": true,
+
     // Allow ES6.
     "es6": true,
   },

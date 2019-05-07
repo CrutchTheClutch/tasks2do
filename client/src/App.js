@@ -40,6 +40,10 @@ class App extends Component {
 
     const root = document.getElementById('root');
 
+    if (!root) {
+      return;
+    }
+
     const oldTheme = (`${themePrefix}${themeName}`);
     const newTheme = (`${themePrefix}${newThemeName}`);
 
