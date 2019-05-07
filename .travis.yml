@@ -1,0 +1,18 @@
+# All instances of ci-cd branch will be changed once .travis.yml
+# is confirmed to have correct settings
+
+language: node_js
+node_js:
+- stable
+cache: npm
+branches:
+  only:
+  - ci-cd
+jobs:
+  include:
+    - stage: frontend unit tests
+      script: cd client
+      script: npm test
+    - stage: backend unit tests
+      script: cd ../server
+      script: npm test
