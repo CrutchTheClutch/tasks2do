@@ -67,6 +67,9 @@
     // Suppress warnings about inconsistent line endings (LF/CRLF).
     "linebreak-style": 0,
 
+    // Supress errors about extraneous dependencies, still ensure dependencies are used.
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+
     /*
      * REACT RULES
      */
