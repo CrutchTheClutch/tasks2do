@@ -4,7 +4,10 @@
 language: node_js
 node_js:
 - stable
-cache: npm
+cache:
+  directories:
+    - client/node_modules
+    - server/node_modules
 script: 'true'
 branches:
   only:
