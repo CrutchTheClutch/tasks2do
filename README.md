@@ -6,6 +6,9 @@ www.tasks2do.com
 
 ## Table of Contents
 
+## Status
+[![Build Status](https://travis-ci.com/CrutchTheClutch/tasks2do.svg?branch=master)](https://travis-ci.com/CrutchTheClutch/tasks2do)
+
 ## File Structure
 
 ```bash
