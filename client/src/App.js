@@ -21,6 +21,7 @@ class App extends Component {
     super(props);
     this.updateTheme = this.updateTheme.bind(this);
     this.state = {
+      loggedIn: true,
       nightMode: false,
       themeName: 'dark',
     };
@@ -61,11 +62,11 @@ class App extends Component {
   }
 
   render() {
-    const { nightMode } = this.state;
+    const { loggedIn, nightMode } = this.state;
 
     return (
       <main id="app-root" className="d-flex flex-column">
-        <Navbar nightMode={nightMode} updateTheme={this.updateTheme} />
+        <Navbar loggedIn={loggedIn} nightMode={nightMode} updateTheme={this.updateTheme} />
         <div className="p-0 flex-grow-1">
           <TaskList />
         </div>
