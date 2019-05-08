@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FaTasks } from 'react-icons/fa';
-import { IoMdAdd, IoIosMoon } from 'react-icons/io';
+import { IoMdAdd, IoMdSettings } from 'react-icons/io';
 
 import './Navbar.scss';
 
 import CustomButton from '../CustomButton';
+import SettingsMenu from '../SettingsMenu/SettingsMenu';
 
 const propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
   nightMode: PropTypes.bool.isRequired,
   updateTheme: PropTypes.func.isRequired,
 };
@@ -16,24 +18,26 @@ const defaultProps = {
 
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
 class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.toggleNightMode = this.toggleNightMode.bind(this);
+    this.toggleSettingsMenu = this.toggleSettingsMenu.bind(this);
+    this.state = {
+      isOpen: false,
+    };
   }
 
-  toggleNightMode() {
-    const { nightMode, updateTheme } = this.props;
-    if (nightMode) {
-      updateTheme('light');
-    } else {
-      updateTheme('dark');
-    }
+  toggleSettingsMenu() {
+    const { isOpen } = this.state;
+    this.setState({
+      isOpen: !isOpen,
+    });
   }
 
   render() {
-    const { nightMode } = this.props;
+    const { loggedIn, nightMode, updateTheme } = this.props;
+    const { isOpen } = this.state;
+
     return (
       <div className="navbar align-items-center">
         <div className="col-7 col-sm-3 col-md-3 p-0">
@@ -44,13 +48,22 @@ class Navbar extends Component {
         </div>
         <div className="d-none d-sm-block col-sm-6 col-md-6 p-0" />
         <div className="col-5 col-sm-3 col-md-3 p-0 text-right">
-          <CustomButton className="transparentButton" content={<IoMdAdd className="icon" />} />
+          {loggedIn ? (
+            <CustomButton content={<IoMdAdd className="icon" />} />
+          ) : (
+            null
+          )}
           <CustomButton
-            className="transparentButton"
             content={
-              <IoIosMoon className={`icon${nightMode ? ' nightMode' : ''}`} />
+              <IoMdSettings className="icon" />
             }
-            onClick={this.toggleNightMode}
+            onClick={this.toggleSettingsMenu}
+          />
+          <SettingsMenu
+            isOpen={isOpen}
+            loggedIn={loggedIn}
+            nightMode={nightMode}
+            updateTheme={updateTheme}
           />
         </div>
       </div>
