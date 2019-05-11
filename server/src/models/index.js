@@ -1,3 +1,2 @@
-import User from './user';
-
-export default User;
+export { User } from './user';
+//export { Task } from './task';

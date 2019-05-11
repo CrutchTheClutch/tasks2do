@@ -1,11 +1,11 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import mongoose from 'mongoose';
+
+import { APP_PORT, DB_USER, DB_PASS, DB_HOST, DB_ARGS, IN_PROD } from './config';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
-import {
-  APP_PORT, DB_USER, DB_PASS, DB_HOST, DB_ARGS,
-} from './config';
+import { isAuth } from './middleware';
 
 (async () => {
   try {
@@ -16,13 +16,16 @@ import {
     const app = express();
 
     app.disable('x-powered-by');
-
-    console.log(process.env.NODE_ENV);
+    app.use(isAuth);
 
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      playground: process.env.NODE_ENV !== 'production',
+      playground: !IN_PROD,
+      context: ({ req }) => ({
+        isAuth: req.isAuth,
+        userId: req.userId,
+      })
     });
 
     server.applyMiddleware({ app });
