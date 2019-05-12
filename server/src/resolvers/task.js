@@ -1,27 +1,42 @@
-import { Task } from '../models';
+import { Task, User } from '../models';
 
 export default {
-  Query: {
-    tasks: () => {
-      return Task.find({});
-    },
-    task: ({ id }) => {
-      return Task.findById(id);
-    },
-  },
   Mutation: {
-    createTask: (parent, { name, dueDate }, context, info) => {
+    createTask: async (parent, { name, dueDate }, context, info) => {
       if (!context.isAuth) {
         throw new Error('Unauthenticated!');
       }
 
-       const newTask = ({
+      const newTask = ({
         name,
         dueDate,
-        assignedTo: context.userId,
+        assignedTo: await User.findById(context.userId),
       });
 
-      return Task.create(newTask);
+      const task = await Task.create(newTask);
+
+      await User.findOneAndUpdate(context.userId, {
+        $push: { tasks: task }
+      })
+
+      return task;
     },
-  }
+
+    deleteTask: async (parent, { id }, context, info) => {
+      if (!context.isAuth) {
+        throw new Error('Unauthenticated!');
+      }
+
+      const task = await Task.findByIdAndDelete(id);
+      if (!task) {
+        throw new Error('Task not found.');
+      }
+
+      await User.findOneAndUpdate(context.userId, {
+        $pull: { tasks: id }
+      })
+
+      return task;
+    },
+  },
 };

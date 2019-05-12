@@ -14,12 +14,8 @@ const taskSchema = new Schema ({
     type: Date,
     required: false,
   },
-  assignedTo: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-  }
 }, {
-  timestamps: true,
-})
+    timestamps: true,
+});
 
 export const Task = mongoose.model('Task', taskSchema);

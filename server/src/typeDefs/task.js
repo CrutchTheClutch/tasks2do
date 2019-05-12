@@ -6,20 +6,17 @@ export default gql`
     name: String!
     completed: Boolean!
     dueDate: String
-    assignedTo: User!
     createdAt: String!
     updatedAt: String!
   }
-
-  extend type Query {
-    task(id: ID!): Task
-    tasks(assignedTo: ID!): [Task!]!
-  }
-
+  
   extend type Mutation {
     createTask(
       name: String!
       dueDate: String
+    ): Task
+    deleteTask(
+      id: ID!
     ): Task
   }
 `;
