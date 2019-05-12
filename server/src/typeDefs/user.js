@@ -6,7 +6,7 @@ export default gql`
     email: String!
     username: String!
     name: String!
-    tasks: [Task!]
+    tasks: [Task!]!
     createdAt: String!
     updatedAt: String!
   }

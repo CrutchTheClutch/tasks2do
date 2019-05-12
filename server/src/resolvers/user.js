@@ -6,12 +6,14 @@ import { User } from '../models';
 
 export default {
   Query: {
-    users: (parent, args, context, info) => {
-      return User.find({});
+    user: (parent, { id }, context, info) => {
+      // TODO: users should not be able to list other's credentials
+      return User.findById(id);
     },
 
-    user: (parent, { id }, context, info) => {
-      return User.findById(id);
+    users: (parent, args, context, info) => {
+      // TODO: users should not be able to list other's credentials
+      return User.find({});
     },
 
     signIn: async (parent, { email, password }, context, info) => {
@@ -81,10 +83,9 @@ export default {
       return user;
     },
   },
-  // User: {
-  //   tasks: async (user, args, { req }, info) => {
-  //     // TODO: should not be able to list other ppl's tasks
-  //     return (await User.populate('tasks').execPopulate()).tasks
-  //   }
-  // }
+  User: {
+    tasks: async (parent, args, context, info) => {
+      return (await parent.populate('tasks').execPopulate()).tasks
+    }
+  },
 };

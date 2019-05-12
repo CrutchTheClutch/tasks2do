@@ -10,8 +10,11 @@ import { isAuth } from './middleware';
 (async () => {
   try {
     mongoose.Promise = global.Promise;
+    
     const DB_URI = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_ARGS}`;
     mongoose.connect(DB_URI, { useNewUrlParser: true });
+
+    mongoose.set('useFindAndModify', false);
 
     const app = express();
 
