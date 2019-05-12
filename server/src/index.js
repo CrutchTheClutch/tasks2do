@@ -1,6 +1,7 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 import { APP_PORT, DB_USER, DB_PASS, DB_HOST, DB_ARGS, IN_PROD } from './config';
 import typeDefs from './typeDefs';
@@ -19,6 +20,7 @@ import { isAuth } from './middleware';
     const app = express();
 
     app.disable('x-powered-by');
+    app.use(cors());
     app.use(isAuth);
 
     const server = new ApolloServer({

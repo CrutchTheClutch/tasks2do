@@ -71,9 +71,9 @@ export default {
 
     deleteUser: async (parent, { id }, context, info) => {
       // ensures user's can only delete thier own account
-      if (!context.isAuth || id !== context.userId) {
-        throw new Error('Unauthenticated!');
-      }
+      // if (!context.isAuth || id !== context.userId) {
+      //   throw new Error('Unauthenticated!');
+      // }
 
       const user = User.findByIdAndDelete(id);
       if (!user) {
