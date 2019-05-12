@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FaTasks } from 'react-icons/fa';
 import { IoMdAdd, IoMdSettings } from 'react-icons/io';
+import gql from 'graphql-tag';
+import { Query, Mutation } from 'react-apollo';
 
 import './Navbar.scss';
 
@@ -9,14 +11,34 @@ import CustomButton from '../CustomButton';
 import SettingsMenu from '../SettingsMenu/SettingsMenu';
 
 const propTypes = {
+  name: PropTypes.string, // Dummy Value
+  dueDate: PropTypes.string, // Dummy Value
   loggedIn: PropTypes.bool.isRequired,
   nightMode: PropTypes.bool.isRequired,
   updateTheme: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-
+  name: 'New Task!', // Dummy Value
+  dueDate: '1557681923261', // Dummy Value
 };
+
+const USER_NAME_QUERY = gql`
+  query UserNameQuery {
+    user(id:"5cd7f0d68ec310afd9a2f7a5") {
+      id
+      name
+    }
+  }
+`;
+
+const CREATE_DUMMY_TASK_MUTATION = gql`
+  mutation CreateDummyTaskMutation($name: String!, $dueDate: String) {
+    createTask(name: $name, dueDate: $dueDate) {
+      id
+    }
+  }
+`;
 
 class Navbar extends Component {
   constructor(props) {
@@ -35,7 +57,7 @@ class Navbar extends Component {
   }
 
   render() {
-    const { loggedIn, nightMode, updateTheme } = this.props;
+    const { name, dueDate, loggedIn, nightMode, updateTheme } = this.props;
     const { isOpen } = this.state;
 
     return (
@@ -49,7 +71,17 @@ class Navbar extends Component {
         <div className="d-none d-sm-block col-sm-6 col-md-6 p-0" />
         <div className="col-5 col-sm-3 col-md-3 p-0 text-right">
           {loggedIn ? (
-            <CustomButton content={<IoMdAdd className="icon" />} />
+            <Mutation mutation={CREATE_DUMMY_TASK_MUTATION} variables={{ name, dueDate }}>
+              {createDummyTaskMutation => (
+                <CustomButton
+                  content={
+                    <IoMdAdd className="icon" />
+              }
+                  onClick={createDummyTaskMutation}
+                />
+              )}
+            </Mutation>
+
           ) : (
             null
           )}
@@ -59,12 +91,21 @@ class Navbar extends Component {
             }
             onClick={this.toggleSettingsMenu}
           />
-          <SettingsMenu
-            isOpen={isOpen}
-            loggedIn={loggedIn}
-            nightMode={nightMode}
-            updateTheme={updateTheme}
-          />
+          <Query query={USER_NAME_QUERY}>
+            {({ loading, error, data }) => {
+              if (loading) return <h4>Loading...</h4>;
+              if (error) return <h4>Error</h4>;
+              return (
+                <SettingsMenu
+                  isOpen={isOpen}
+                  loggedIn={loggedIn}
+                  nightMode={nightMode}
+                  updateTheme={updateTheme}
+                  userName={data.user.name}
+                />
+              );
+            }}
+          </Query>
         </div>
       </div>
     );

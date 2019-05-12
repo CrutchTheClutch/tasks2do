@@ -11,11 +11,11 @@ const propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   nightMode: PropTypes.bool.isRequired,
   updateTheme: PropTypes.func.isRequired,
-  userName: PropTypes.string.isRequired,
+  userName: PropTypes.string,
 };
 
 const defaultProps = {
-
+  userName: 'Guest',
 };
 
 class SettingsMenu extends Component {
@@ -45,15 +45,27 @@ class SettingsMenu extends Component {
         <div className={`settings-menu dropdown-menu dropdown-menu-right ${isOpen ? ' show' : ''}`}>
           <IoMdArrowDropup className="dropdown-caret outline" />
           <IoMdArrowDropup className="dropdown-caret fill" />
-          <CustomButton
-            content={(
-              <div className="align-items-center d-inline-flex">
-                <IoMdPerson className="icon" />
-                <div className="menu-item-text text-break-all">{userName}</div>
-              </div>
-            )}
-            onClick={this.toggleNightMode}
-          />
+          {loggedIn ? (
+            <CustomButton
+              content={(
+                <div className="align-items-center d-inline-flex">
+                  <IoMdPerson className="icon" />
+                  <div className="menu-item-text text-break-all">{userName}</div>
+                </div>
+              )}
+              onClick={this.toggleNightMode}
+            />
+          ) : (
+            <CustomButton
+              content={(
+                <div className="align-items-center d-inline-flex">
+                  <IoMdPerson className="icon" />
+                  <div className="menu-item-text text-break-all">Login</div>
+                </div>
+              )}
+              onClick={this.toggleNightMode}
+            />
+          )}
           <CustomButton
             content={(
               <div className="align-items-center d-inline-flex">

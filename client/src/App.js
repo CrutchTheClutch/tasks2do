@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // import { BrowserRouter as Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
 
 import './App.scss';
 
@@ -15,6 +17,10 @@ const propTypes = {
 const defaultProps = {
   themePrefix: 'theme-',
 };
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
+});
 
 class App extends Component {
   constructor(props) {
@@ -65,13 +71,20 @@ class App extends Component {
     const { loggedIn, nightMode } = this.state;
 
     return (
-      <main id="app-root" className="d-flex flex-column">
-        <Navbar loggedIn={loggedIn} nightMode={nightMode} updateTheme={this.updateTheme} />
-        <div className="p-0 flex-grow-1">
-          <TaskList />
-        </div>
-        <Footer />
-      </main>
+      <ApolloProvider client={client}>
+        <main id="app-root" className="d-flex flex-column">
+          <Navbar
+            loggedIn={loggedIn}
+            nightMode={nightMode}
+            login={this.login}
+            updateTheme={this.updateTheme}
+          />
+          <div className="p-0 flex-grow-1">
+            <TaskList />
+          </div>
+          <Footer />
+        </main>
+      </ApolloProvider>
     );
   }
 }

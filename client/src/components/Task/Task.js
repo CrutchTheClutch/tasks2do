@@ -1,27 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { IoMdCheckmarkCircle, IoIosRadioButtonOff } from 'react-icons/io';
+import { IoMdCheckmarkCircle, IoIosRadioButtonOff, IoMdCloseCircle } from 'react-icons/io';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
 
 import './Task.scss';
 import CustomButton from '../CustomButton';
 
 const propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,
   taskName: PropTypes.string.isRequired,
-  dueDate: PropTypes.string, // Is there a date PropType? String for now
+  dueDate: PropTypes.string,
 };
 
 const defaultProps = {
   dueDate: null,
 };
 
+const DELETE_TASK_MUTATION = gql`
+  mutation DeleteTaskMutation($id: ID!) {
+    deleteTask(id: $id) {
+      id
+    }
+  }
+`;
+
 class Task extends Component {
   constructor(props) {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
+    this.toggleHover = this.toggleHover.bind(this);
     this.state = {
       completed: this.props.completed,
+      hover: false,
     };
   }
 
@@ -30,17 +42,27 @@ class Task extends Component {
     this.setState({
       completed: !completed,
     });
-    console.log(completed);
+  }
+
+  toggleHover() {
+    const { hover } = this.state;
+    this.setState({
+      hover: !hover,
+    });
   }
 
   render() {
-    const { taskName, dueDate } = this.props;
-    const {completed } = this.state;
+    const { id, taskName, dueDate } = this.props;
+    const { completed, hover } = this.state;
 
     return (
-      <div className={`task row no-gutters align-items-center ${completed ? '' : 'tasks2do'}`}>
+      <div
+        className={`task row no-gutters align-items-center ${completed ? '' : 'tasks2do'}`}
+        onMouseEnter={this.toggleHover}
+        onMouseLeave={this.toggleHover}
+      >
         <CustomButton
-          className="completed" //col-auto
+          className="completed"
           content={completed ? (
             <IoMdCheckmarkCircle className="icon text-brand-primary" />
           ) : (
@@ -51,9 +73,24 @@ class Task extends Component {
         <div className="taskName col flex-grow-1">
           {taskName}
         </div>
-        <div className="dueDate col-auto">
-          {dueDate}
-        </div>
+
+        {!hover ? (
+          <div className="dueDate col-auto">
+            {dueDate}
+          </div>
+        ) : (
+          <Mutation mutation={DELETE_TASK_MUTATION} variables={{ id }}>
+            {deleteTaskMutation => (
+              <CustomButton
+                className="completed"
+                content={
+                  <IoMdCloseCircle className="icon" />
+                }
+                onClick={deleteTaskMutation}
+              />
+            )}
+          </Mutation>
+        )}
       </div>
     );
   }
