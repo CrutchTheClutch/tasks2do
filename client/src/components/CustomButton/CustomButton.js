@@ -7,7 +7,7 @@ const propTypes = {
   className: PropTypes.oneOf([
     'transparentButton',
     'completed',
-  ]).isRequired,
+  ]),
   content: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.element,
@@ -16,6 +16,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  className: 'transparentButton',
   onClick: () => {},
 };
 
