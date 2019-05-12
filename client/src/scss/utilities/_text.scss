@@ -1,0 +1,4 @@
+.text-break-all {
+  word-break: break-all !important; // IE & < Edge 18
+  overflow-wrap: break-all !important;
+}

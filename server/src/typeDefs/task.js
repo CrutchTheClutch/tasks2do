@@ -15,6 +15,10 @@ export default gql`
       name: String!
       dueDate: String
     ): Task
+    toggleTaskCompleted(
+      id: ID!
+      completed: Boolean!
+    ): Task
     deleteTask(
       id: ID!
     ): Task

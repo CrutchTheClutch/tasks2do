@@ -1,39 +1,65 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FaTasks } from 'react-icons/fa';
-import { IoMdAdd, IoIosMoon } from 'react-icons/io';
+import { IoMdAdd, IoMdSettings } from 'react-icons/io';
+import gql from 'graphql-tag';
+import { Query, Mutation } from 'react-apollo';
 
 import './Navbar.scss';
 
 import CustomButton from '../CustomButton';
+import SettingsMenu from '../SettingsMenu/SettingsMenu';
 
 const propTypes = {
+  name: PropTypes.string, // Dummy Value
+  dueDate: PropTypes.string, // Dummy Value
+  loggedIn: PropTypes.bool.isRequired,
   nightMode: PropTypes.bool.isRequired,
   updateTheme: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-
+  name: 'New Task!', // Dummy Value
+  dueDate: '1557681923261', // Dummy Value
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
+const USER_NAME_QUERY = gql`
+  query UserNameQuery {
+    user(id:"5cd7f0d68ec310afd9a2f7a5") {
+      id
+      name
+    }
+  }
+`;
+
+const CREATE_DUMMY_TASK_MUTATION = gql`
+  mutation CreateDummyTaskMutation($name: String!, $dueDate: String) {
+    createTask(name: $name, dueDate: $dueDate) {
+      id
+    }
+  }
+`;
+
 class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.toggleNightMode = this.toggleNightMode.bind(this);
+    this.toggleSettingsMenu = this.toggleSettingsMenu.bind(this);
+    this.state = {
+      isOpen: false,
+    };
   }
 
-  toggleNightMode() {
-    const { nightMode, updateTheme } = this.props;
-    if (nightMode) {
-      updateTheme('light');
-    } else {
-      updateTheme('dark');
-    }
+  toggleSettingsMenu() {
+    const { isOpen } = this.state;
+    this.setState({
+      isOpen: !isOpen,
+    });
   }
 
   render() {
-    const { nightMode } = this.props;
+    const { name, dueDate, loggedIn, nightMode, updateTheme } = this.props;
+    const { isOpen } = this.state;
+
     return (
       <div className="navbar align-items-center">
         <div className="col-7 col-sm-3 col-md-3 p-0">
@@ -44,14 +70,42 @@ class Navbar extends Component {
         </div>
         <div className="d-none d-sm-block col-sm-6 col-md-6 p-0" />
         <div className="col-5 col-sm-3 col-md-3 p-0 text-right">
-          <CustomButton className="transparentButton" content={<IoMdAdd className="icon" />} />
+          {loggedIn ? (
+            <Mutation mutation={CREATE_DUMMY_TASK_MUTATION} variables={{ name, dueDate }}>
+              {createDummyTaskMutation => (
+                <CustomButton
+                  content={
+                    <IoMdAdd className="icon" />
+              }
+                  onClick={createDummyTaskMutation}
+                />
+              )}
+            </Mutation>
+
+          ) : (
+            null
+          )}
           <CustomButton
-            className="transparentButton"
             content={
-              <IoIosMoon className={`icon${nightMode ? ' nightMode' : ''}`} />
+              <IoMdSettings className="icon" />
             }
-            onClick={this.toggleNightMode}
+            onClick={this.toggleSettingsMenu}
           />
+          <Query query={USER_NAME_QUERY}>
+            {({ loading, error, data }) => {
+              if (loading) return <h4>Loading...</h4>;
+              if (error) return <h4>Error</h4>;
+              return (
+                <SettingsMenu
+                  isOpen={isOpen}
+                  loggedIn={loggedIn}
+                  nightMode={nightMode}
+                  updateTheme={updateTheme}
+                  userName={data.user.name}
+                />
+              );
+            }}
+          </Query>
         </div>
       </div>
     );

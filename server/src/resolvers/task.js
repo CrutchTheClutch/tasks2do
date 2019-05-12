@@ -3,9 +3,9 @@ import { Task, User } from '../models';
 export default {
   Mutation: {
     createTask: async (parent, { name, dueDate }, context, info) => {
-      if (!context.isAuth) {
-        throw new Error('Unauthenticated!');
-      }
+      // if (!context.isAuth) {
+      //   throw new Error('Unauthenticated!');
+      // }
 
       const newTask = ({
         name,
@@ -22,10 +22,24 @@ export default {
       return task;
     },
 
+    toggleTaskCompleted: async (parent, { id, completed }, context, info) => {
+      // if (!context.isAuth) {
+      //   throw new Error('Unauthenticated!');
+      // }
+
+      const task = await Task.findById(id);
+
+      await Task.findOneAndUpdate(id, {
+        $set: { completed: !completed }
+      })
+
+      return task
+    },
+
     deleteTask: async (parent, { id }, context, info) => {
-      if (!context.isAuth) {
-        throw new Error('Unauthenticated!');
-      }
+      // if (!context.isAuth) {
+      //   throw new Error('Unauthenticated!');
+      // }
 
       const task = await Task.findByIdAndDelete(id);
       if (!task) {

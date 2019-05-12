@@ -1,102 +1,58 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+import moment from 'moment';
 
 import './TaskList.scss';
 
 import Task from '../Task';
 
-const propTypes = {
-
-};
-
-const defaultProps = {
-
-};
+const TASKS_QUERY = gql`
+  query TasksQuery {
+    user(id:"5cd7f0d68ec310afd9a2f7a5") {
+      id
+      tasks {
+        id
+        name
+        completed
+        dueDate
+      }
+    }
+  }
+`;
 
 class TaskList extends Component {
-  constructor(props) {
-    super(props);
-    this.getTasks = this.getTasks.bind(this);
-    this.state = {
-      error: null,
-      isLoading: true,
-      tasks: [],
-    };
-  }
-
-  componentDidMount() {
-    this.getTasks();
-  }
-
-  getTasks() {
-    // Get All Tasks from DB HERE
-
-    // Returned "DB" Data (will add actual connection soon)
-    const dummyDATA = [
-      {
-        taskID: 1,
-        completed: false,
-        taskName: 'Finish CMST 488',
-        dueDate: 'May 12 2019',
-      },
-      {
-        taskID: 2,
-        completed: true,
-        taskName: 'Start CMST 488 Final',
-        dueDate: 'May 12 2019',
-      },
-    ];
-
-    this.setState({
-      isLoading: false,
-      tasks: dummyDATA,
-    });
+  // eslint-disable-next-line class-methods-use-this
+  convertDate(dueDate) {
+    const milli = parseInt(dueDate);
+    const formattedDate = moment(milli).format('MMM DD, YYYY');
+    return formattedDate;
   }
 
   render() {
-    const { error, isLoading, tasks } = this.state;
-
     return (
       <div className="taskList col-12 d-table">
-        {error
-          ? (
-            <div>
-              {'error'}
-            </div>
-          )
-          : (
-            null
-          )
-        }
-        {!isLoading ? (
-          tasks.map((task) => {
-            const {
-              taskID,
-              completed,
-              taskName,
-              dueDate,
-            } = task;
+        <Query query={TASKS_QUERY} pollInterval={250}>
+          {({ loading, error, data }) => {
+            if (loading) return <h4>Loading...</h4>;
+            if (error) return <h4>Error</h4>;
+
             return (
-              <Task
-                id={taskID}
-                key={taskID}
-                completed={completed}
-                taskName={taskName}
-                dueDate={dueDate}
-              />
+              data.user.tasks.map(task => (
+                <Task
+                  key={task.id}
+                  id={task.id}
+                  completed={task.completed}
+                  taskName={task.name}
+                  dueDate={this.convertDate(task.dueDate)}
+                />
+              ))
             );
-          })
-        ) : (
-          <div>
-            {'loading...'}
-          </div>
-        )}
+          }}
+        </Query>
       </div>
     );
   }
 }
-
-TaskList.propTypes = propTypes;
-TaskList.defaultProps = defaultProps;
 
 export default TaskList;
