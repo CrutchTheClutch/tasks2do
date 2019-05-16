@@ -32,7 +32,7 @@ class TaskList extends Component {
   render() {
     return (
       <div className="taskList col-12 d-table">
-        <Query query={TASKS_QUERY} pollInterval={250}>
+        <Query query={TASKS_QUERY}>
           {({ loading, error, data }) => {
             if (loading) return <h4>Loading...</h4>;
             if (error) return <h4>Error</h4>;
