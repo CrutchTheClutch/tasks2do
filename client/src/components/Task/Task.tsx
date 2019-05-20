@@ -4,19 +4,8 @@ import { IoMdCheckmarkCircle, IoIosRadioButtonOff, IoMdCloseCircle } from 'react
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 
-import './Task.scss';
 import CustomButton from '../CustomButton';
-
-const propTypes = {
-  id: PropTypes.string.isRequired,
-  completed: PropTypes.bool.isRequired,
-  taskName: PropTypes.string.isRequired,
-  dueDate: PropTypes.string,
-};
-
-const defaultProps = {
-  dueDate: null,
-};
+import './Task.scss';
 
 const DELETE_TASK_MUTATION = gql`
   mutation DeleteTaskMutation($id: ID!) {
@@ -26,8 +15,31 @@ const DELETE_TASK_MUTATION = gql`
   }
 `;
 
-class Task extends Component {
-  constructor(props) {
+interface Props {
+  id: string;
+  completed: boolean;
+  taskName: string;
+  dueDate?: string;
+}
+
+interface State {
+  completed: boolean;
+  hover: boolean;
+}
+
+class Task extends Component<Props, State> {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+    taskName: PropTypes.string.isRequired,
+    dueDate: PropTypes.string,
+  };
+  
+  static defaultProps = {
+    dueDate: null,
+  };
+
+  constructor(props: Props) {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.toggleHover = this.toggleHover.bind(this);
@@ -80,7 +92,7 @@ class Task extends Component {
           </div>
         ) : (
           <Mutation mutation={DELETE_TASK_MUTATION} variables={{ id }}>
-            {deleteTaskMutation => (
+            {(deleteTaskMutation: Function) => (
               <CustomButton
                 className="completed"
                 content={
@@ -95,8 +107,5 @@ class Task extends Component {
     );
   }
 }
-
-Task.propTypes = propTypes;
-Task.defaultProps = defaultProps;
 
 export default Task;
