@@ -28,7 +28,7 @@
   }
 
   &:focus {
-    box-shadow:                                     $custom-button-focus-outline;
+    box-shadow:                                     $custom-button-focus-outline !important;
   }
 
   .icon {

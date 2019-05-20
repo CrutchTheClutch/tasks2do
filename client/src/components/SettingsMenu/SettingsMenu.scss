@@ -20,7 +20,7 @@
     text-align:                                     $settings-menu-custom-button-text-align;
 
     + .customButton {
-      margin-left:                                  0;  // Ignore rule from 'Navbar.scss'
+      margin-left:                                  0 !important;  // Ignore rule from 'Navbar.scss'
     }
   }
 
