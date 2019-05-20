@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
-// import { BrowserRouter as Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-
-import './App.scss';
 
 import Navbar from './components/Navbar';
 import TaskList from './components/TaskList';
 import Footer from './components/Footer';
+import './App.scss';
 
-const propTypes = {
-  themePrefix: PropTypes.string,
-};
+interface Props {
+  themePrefix?: string;
+}
 
-const defaultProps = {
-  themePrefix: 'theme-',
-};
+interface State {
+  loggedIn: boolean;
+  nightMode: boolean;
+  themeName: string;
+}
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-});
+class App extends Component<Props, State> {
+  static propTypes = {
+    themePrefix: PropTypes.string,
+  };
 
-class App extends Component {
-  constructor(props) {
+  static defaultProps = {
+    themePrefix: 'theme-',
+  };
+  login: any;
+
+  constructor(props: Props) {
     super(props);
     this.updateTheme = this.updateTheme.bind(this);
     this.state = {
@@ -41,7 +44,7 @@ class App extends Component {
   //
   // Call this function with a theme name as an argument.
   // Ex: this.updateTheme('light'); or this.updateTheme('dark');
-  updateTheme(newThemeName) {
+  updateTheme(newThemeName: string) {
     const { themePrefix } = this.props;
     const { nightMode, themeName } = this.state;
 
@@ -71,25 +74,20 @@ class App extends Component {
     const { loggedIn, nightMode } = this.state;
 
     return (
-      <ApolloProvider client={client}>
-        <main id="app-root" className="d-flex flex-column">
-          <Navbar
-            loggedIn={loggedIn}
-            nightMode={nightMode}
-            login={this.login}
-            updateTheme={this.updateTheme}
-          />
-          <div className="p-0 flex-grow-1">
-            <TaskList />
-          </div>
-          <Footer />
-        </main>
-      </ApolloProvider>
+      <main id="app-root" className="d-flex flex-column">
+        <Navbar
+          loggedIn={loggedIn}
+          nightMode={nightMode}
+          // login={this.login}
+          updateTheme={this.updateTheme}
+        />
+        <div className="p-0 flex-grow-1">
+          <TaskList />
+        </div>
+        <Footer />
+      </main>
     );
   }
 }
-
-App.propTypes = propTypes;
-App.defaultProps = defaultProps;
 
 export default App;
