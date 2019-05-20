@@ -6,20 +6,31 @@ import './SettingsMenu.scss';
 
 import CustomButton from '../CustomButton';
 
-const propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
-  nightMode: PropTypes.bool.isRequired,
-  updateTheme: PropTypes.func.isRequired,
-  userName: PropTypes.string,
-};
+interface Props {
+  isOpen?: boolean;
+  loggedIn?: boolean;
+  nightMode?: boolean;
+  updateTheme: Function;
+  userName?: string;
+}
 
-const defaultProps = {
-  userName: 'Guest',
-};
+class SettingsMenu extends Component<Props, {}> {
+  static propTypes = {
+    isOpen: PropTypes.bool,
+    loggedIn: PropTypes.bool,
+    nightMode: PropTypes.bool,
+    updateTheme: PropTypes.func.isRequired,
+    userName: PropTypes.string,
+  };
+  
+  static defaultProps = {
+    isOpen: false,
+    loggedIn: false,
+    nightMode: true,
+    userName: 'Guest',
+  };
 
-class SettingsMenu extends Component {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.toggleNightMode = this.toggleNightMode.bind(this);
   }
@@ -80,8 +91,5 @@ class SettingsMenu extends Component {
     );
   }
 }
-
-SettingsMenu.propTypes = propTypes;
-SettingsMenu.defaultProps = defaultProps;
 
 export default SettingsMenu;

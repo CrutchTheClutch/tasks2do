@@ -22,7 +22,6 @@ const TASKS_QUERY = gql`
 `;
 
 class TaskList extends Component {
-  // eslint-disable-next-line class-methods-use-this
   convertDate(dueDate: string) {
     const milli = parseInt(dueDate);
     const formattedDate = moment(milli).format('MMM DD, YYYY');
