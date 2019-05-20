@@ -5,23 +5,10 @@ import { IoMdAdd, IoMdSettings } from 'react-icons/io';
 import gql from 'graphql-tag';
 import { Query, Mutation } from 'react-apollo';
 
-import './Navbar.scss';
-
 import CustomButton from '../CustomButton';
 import SettingsMenu from '../SettingsMenu/SettingsMenu';
-
-const propTypes = {
-  name: PropTypes.string, // Dummy Value
-  dueDate: PropTypes.string, // Dummy Value
-  loggedIn: PropTypes.bool.isRequired,
-  nightMode: PropTypes.bool.isRequired,
-  updateTheme: PropTypes.func.isRequired,
-};
-
-const defaultProps = {
-  name: 'New Task!', // Dummy Value
-  dueDate: '1557681923261', // Dummy Value
-};
+import './Navbar.scss';
+import { ApolloError } from 'apollo-boost';
 
 const USER_NAME_QUERY = gql`
   query UserNameQuery {
@@ -40,8 +27,33 @@ const CREATE_DUMMY_TASK_MUTATION = gql`
   }
 `;
 
-class Navbar extends Component {
-  constructor(props) {
+interface Props {
+  name?: string;
+  dueDate?: string;
+  loggedIn: boolean;
+  nightMode: boolean;
+  updateTheme: Function;
+}
+
+interface State {
+  isOpen: boolean;
+}
+
+class Navbar extends Component<Props, State> {
+  static propTypes = {
+    name: PropTypes.string, // Dummy Value
+    dueDate: PropTypes.string, // Dummy Value
+    loggedIn: PropTypes.bool.isRequired,
+    nightMode: PropTypes.bool.isRequired,
+    updateTheme: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    name: 'New Task!', // Dummy Value
+    dueDate: '1557681923261', // Dummy Value
+  };
+
+  constructor(props: Props) {
     super(props);
     this.toggleSettingsMenu = this.toggleSettingsMenu.bind(this);
     this.state = {
@@ -72,7 +84,7 @@ class Navbar extends Component {
         <div className="col-5 col-sm-3 col-md-3 p-0 text-right">
           {loggedIn ? (
             <Mutation mutation={CREATE_DUMMY_TASK_MUTATION} variables={{ name, dueDate }}>
-              {createDummyTaskMutation => (
+              {(createDummyTaskMutation: Function) => (
                 <CustomButton
                   content={
                     <IoMdAdd className="icon" />
@@ -92,7 +104,7 @@ class Navbar extends Component {
             onClick={this.toggleSettingsMenu}
           />
           <Query query={USER_NAME_QUERY}>
-            {({ loading, error, data }) => {
+            {({ loading, error, data }: { loading: boolean; error?: ApolloError; data: any; }) => {
               if (loading) return <h4>Loading...</h4>;
               if (error) return <h4>Error</h4>;
               return (
@@ -111,8 +123,5 @@ class Navbar extends Component {
     );
   }
 }
-
-Navbar.propTypes = propTypes;
-Navbar.defaultProps = defaultProps;
 
 export default Navbar;
