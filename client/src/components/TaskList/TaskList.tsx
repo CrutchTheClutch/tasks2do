@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+import { Query, QueryResult } from 'react-apollo';
 import moment from 'moment';
 
-import './TaskList.scss';
-
 import Task from '../Task';
+import './TaskList.scss';
+import { ApolloError } from 'apollo-boost';
 
 const TASKS_QUERY = gql`
   query TasksQuery {
@@ -23,7 +23,7 @@ const TASKS_QUERY = gql`
 
 class TaskList extends Component {
   // eslint-disable-next-line class-methods-use-this
-  convertDate(dueDate) {
+  convertDate(dueDate: string) {
     const milli = parseInt(dueDate);
     const formattedDate = moment(milli).format('MMM DD, YYYY');
     return formattedDate;
@@ -33,12 +33,12 @@ class TaskList extends Component {
     return (
       <div className="taskList col-12 d-table">
         <Query query={TASKS_QUERY}>
-          {({ loading, error, data }) => {
+          {({ loading, error, data }: { loading: boolean; error?: ApolloError; data: any; }) => {
             if (loading) return <h4>Loading...</h4>;
             if (error) return <h4>Error</h4>;
 
             return (
-              data.user.tasks.map(task => (
+              data.user.tasks.map((task: { id: string; completed: boolean; name: string; dueDate: string; }) => (
                 <Task
                   key={task.id}
                   id={task.id}
