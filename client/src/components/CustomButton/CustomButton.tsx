@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+import * as React from 'react';
 import './CustomButton.scss';
 
 const classNames = ['transparentButton', 'completed'];
@@ -8,32 +6,27 @@ export type classNames = (typeof classNames)[number];
 
 interface Props {
   className?: classNames;
-  content: object | Element;
+  content: JSX.Element;
   onClick: Function;
 }
 
-class CustomButton extends Component<Props, {}> {
-  static propTypes = {
-    className: PropTypes.oneOf(classNames),
-    content: PropTypes.oneOfType([PropTypes.object, PropTypes.element]).isRequired,
-    onClick: PropTypes.func,
-  };
-
-  static defaultProps = {
+class CustomButton extends React.Component<Props, {}> {
+  public static defaultProps = {
     className: 'transparentButton',
-    onClick: () => { },
+    onClick: (): void => { },
   };
 
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick() {
-    this.props.onClick();
+  public onClick(): void {
+    const { onClick } = this.props;
+    onClick();
   }
 
-  render() {
+  public render(): JSX.Element {
     const { className, content } = this.props;
 
     return (
