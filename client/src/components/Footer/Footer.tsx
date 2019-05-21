@@ -1,9 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { IoLogoGithub } from 'react-icons/io';
-
 import './Footer.scss';
 
-const Footer = () => (
+const Footer = (): JSX.Element => (
   <div className="footer container-fluid align-items-center">
     <div className="row no-gutters">
       <div className="col-10 text-left my-auto">

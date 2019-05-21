@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { Query, QueryResult } from 'react-apollo';
 import moment from 'moment';
-
+import { ApolloError } from 'apollo-boost';
 import Task from '../Task';
 import './TaskList.scss';
-import { ApolloError } from 'apollo-boost';
+
 
 const TASKS_QUERY = gql`
   query TasksQuery {

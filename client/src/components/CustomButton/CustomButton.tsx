@@ -18,10 +18,10 @@ class CustomButton extends Component<Props, {}> {
     content: PropTypes.oneOfType([PropTypes.object, PropTypes.element]).isRequired,
     onClick: PropTypes.func,
   };
-  
+
   static defaultProps = {
     className: 'transparentButton',
-    onClick: () => {},
+    onClick: () => { },
   };
 
   constructor(props: Props) {

@@ -24,7 +24,6 @@ class App extends Component<Props, State> {
   static defaultProps = {
     themePrefix: 'theme-',
   };
-  login: any;
 
   constructor(props: Props) {
     super(props);
