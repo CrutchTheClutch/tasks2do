@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 describe('Footer', (): void => {
   it('renders without crashing', (): void => {
-    const footer = <Footer />
+    const footer = <Footer />;
     shallow(footer);
   });
 });

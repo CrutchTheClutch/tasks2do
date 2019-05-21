@@ -13,7 +13,7 @@ interface Props {
 class CustomButton extends React.Component<Props, {}> {
   public static defaultProps = {
     className: 'transparentButton',
-    onClick: (): void => { },
+    onClick: (): void => {},
   };
 
   public constructor(props: Props) {

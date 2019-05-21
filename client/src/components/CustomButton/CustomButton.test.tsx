@@ -4,7 +4,7 @@ import CustomButton from './CustomButton';
 
 describe('CustomButton', (): void => {
   it('renders without crashing', (): void => {
-    const customButton = <CustomButton content={<div>test</div>} />
+    const customButton = <CustomButton content={<div>test</div>} />;
     shallow(customButton);
   });
 });

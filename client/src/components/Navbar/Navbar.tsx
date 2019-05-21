@@ -8,10 +8,9 @@ import CustomButton from '../CustomButton';
 import SettingsMenu from '../SettingsMenu/SettingsMenu';
 import './Navbar.scss';
 
-
 const USER_NAME_QUERY = gql`
   query UserNameQuery {
-    user(id:"5cd7f0d68ec310afd9a2f7a5") {
+    user(id: "5cd7f0d68ec310afd9a2f7a5") {
       id
       name
     }
@@ -68,34 +67,40 @@ class Navbar extends React.Component<Props, State> {
         <div className="col-7 col-sm-3 col-md-3 p-0">
           <div className="logo">
             <FaTasks className="icon" />
-            <div className="brandName d-inline-block align-middle">tasks2do</div>
+            <div className="brandName d-inline-block align-middle">
+              tasks2do
+            </div>
           </div>
         </div>
         <div className="d-none d-sm-block col-sm-6 col-md-6 p-0" />
         <div className="col-5 col-sm-3 col-md-3 p-0 text-right">
           {loggedIn ? (
-            <Mutation mutation={CREATE_DUMMY_TASK_MUTATION} variables={{ name, dueDate }}>
+            <Mutation
+              mutation={CREATE_DUMMY_TASK_MUTATION}
+              variables={{ name, dueDate }}
+            >
               {(createDummyTaskMutation: Function): JSX.Element | null => (
                 <CustomButton
-                  content={
-                    <IoMdAdd className="icon" />
-                  }
+                  content={<IoMdAdd className="icon" />}
                   onClick={createDummyTaskMutation}
                 />
               )}
             </Mutation>
-
-          ) : (
-              null
-            )}
+          ) : null}
           <CustomButton
-            content={
-              <IoMdSettings className="icon" />
-            }
+            content={<IoMdSettings className="icon" />}
             onClick={this.toggleSettingsMenu}
           />
           <Query query={USER_NAME_QUERY}>
-            {({ loading, error, data }: { loading: boolean; error?: ApolloError; data: any; }): JSX.Element => {
+            {({
+              loading,
+              error,
+              data,
+            }: {
+              loading: boolean;
+              error?: ApolloError;
+              data: any;
+            }): JSX.Element => {
               if (loading) return <h4>Loading...</h4>;
               if (error) return <h4>Error</h4>;
               return (
