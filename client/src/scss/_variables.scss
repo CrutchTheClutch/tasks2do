@@ -1,140 +1,160 @@
-// App
-//
-// Global App settings.
-$app-min-height:                                    100%;
-$app-min-width:                                     265px;
-$app-line-height:                                   1;
-$app-word-break:                                    break-word;
-$app-headings-font-weigth:                          400;
-$app-button-horizontal-gap:                         0.5em;
-$icon-font-size:                                    1.1em;
-$link-color-transition:                             color 0s,
-                                                    background-color 0s,
-                                                    border-color 0s,
-                                                    box-shadow 0s;
+/**
+* App
+*
+* Global App settings.
+*/
+$app-min-height: 100%;
+$app-min-width: 265px;
+$app-line-height: 1;
+$app-word-break: break-word;
+$app-headings-font-weigth: 400;
+$app-button-horizontal-gap: 0.5em;
+$icon-font-size: 1.1em;
+$link-color-transition: color 0s, background-color 0s, border-color 0s,
+  box-shadow 0s;
 
-// Navbar
-//
-// Navbar settings.
-$navbar-min-height:                                 3.5em;
-$navbar-padding:                                    calc(#{$navbar-min-height} / 4.8);
+/**
+* Navbar
+*
+* Navbar settings.
+*/
+$navbar-min-height: 3.5em;
+$navbar-padding: calc(#{$navbar-min-height} / 4.8);
 
-$navbar-icon-font-size:                             calc(#{$navbar-min-height} / 1.84);
-$navbar-icon-margin-right:                          0.25em;
+$navbar-icon-font-size: calc(#{$navbar-min-height} / 1.84);
+$navbar-icon-margin-right: 0.25em;
 
-$navbar-brandName-font-size:                        calc(#{$navbar-icon-font-size} / 1.25);
-$navbar-brandName-line-height:                      1em;
-$navbar-brandName-margin-bottom:                    0.125em;
+$navbar-brandName-font-size: calc(#{$navbar-icon-font-size} / 1.25);
+$navbar-brandName-line-height: 1em;
+$navbar-brandName-margin-bottom: 0.125em;
 
-// Settings Menu
-//
-// Settings Menu settings
-$settings-menu-padding:                             0.25rem 0;
-$settings-menu-min-width:                           15rem;
-$settings-menu-border:                              1px solid;
-$settings-menu-box-shadow:                          rgba(0, 0, 0, 0.6) 4px 4px 8px -1px;
+/**
+* Settings Menu
+*
+* Settings Menu settings.
+*/
+$settings-menu-padding: 0.25rem 0;
+$settings-menu-min-width: 15rem;
+$settings-menu-border: 1px solid;
+$settings-menu-box-shadow: rgba(0, 0, 0, 0.6) 4px 4px 8px -1px;
 
-$settings-menu-button-border-radius:                0;
-$settings-menu-custom-button-text-align:            left;
+$settings-menu-button-border-radius: 0;
+$settings-menu-custom-button-text-align: left;
 
-$settings-menu-menu-item-text-margin-left:          0.5rem;
-$settings-menu-menu-item-text-font-size:            0.875rem;
+$settings-menu-menu-item-text-margin-left: 0.5rem;
+$settings-menu-menu-item-text-font-size: 0.875rem;
 
-$setttings-menu-item-height:                        1.75rem;
-$setttings-menu-item-width:                         100%;
-$setttings-menu-item-padding:                       0.25rem 0.5rem;
-$setttings-menu-item-line-height:                   1;
+$setttings-menu-item-height: 1.75rem;
+$setttings-menu-item-width: 100%;
+$setttings-menu-item-padding: 0.25rem 0.5rem;
+$setttings-menu-item-line-height: 1;
 
-$setttings-menu-caret-padding:                      0;
-$setttings-menu-caret-fill-size:                    2em;
-$setttings-menu-caret-outline-size:                 calc(#{$setttings-menu-caret-fill-size} + 0.1em);
+$setttings-menu-caret-padding: 0;
+$setttings-menu-caret-fill-size: 2em;
+$setttings-menu-caret-outline-size: calc(
+  #{$setttings-menu-caret-fill-size} + 0.1em
+);
 
-$setttings-menu-caret-fill-top:                     -1.25em;//-0.74707rem;
-$setttings-menu-caret-fill-right:                   0.35em;
+$setttings-menu-caret-fill-top: -1.25em; //-0.74707rem;
+$setttings-menu-caret-fill-right: 0.35em;
 
-$setttings-menu-caret-outline-top:                  calc(#{$setttings-menu-caret-fill-top} - 0.125em);
-$setttings-menu-caret-outline-right:                calc(#{$setttings-menu-caret-fill-right} - 0.04675em);
+$setttings-menu-caret-outline-top: calc(
+  #{$setttings-menu-caret-fill-top} - 0.125em
+);
+$setttings-menu-caret-outline-right: calc(
+  #{$setttings-menu-caret-fill-right} - 0.04675em
+);
 
-// Custom Button
-//
-// Custom Button settings.
+/**
+* Custom Button
+*
+* Custom Button settings.
+*/
 
 // Completed Button
-$custom-button-completed-padding:                   0;
-$custom-button-focus-outline:                       none;
+$custom-button-completed-padding: 0;
+$custom-button-focus-outline: none;
 
-// Task
-//
-// Task settings.
-$task-min-height:                                   3em;
-$task-col-inner-margin:                             1em;
-$task-border-bottom:                                1px solid;
-$task-done-opacity:                                 0.3;
-$task-date-font-size:                               0.775em;
+/**
+* Task
+*
+* Task settings.
+*/
+$task-min-height: 3em;
+$task-col-inner-margin: 1em;
+$task-border-bottom: 1px solid;
+$task-done-opacity: 0.3;
+$task-date-font-size: 0.775em;
 
-// Footer
-//
-// Footer settings.
-$footer-min-height:                                 2.75em;
-$footer-padding:                                    calc(#{$footer-min-height} / 4.8);
+/**
+* Footer
+*
+* Footer settings.
+*/
+$footer-min-height: 2.75em;
+$footer-padding: calc(#{$footer-min-height} / 4.8);
 
-$footer-fa-font-size:                               calc(#{$footer-min-height} / 1.84);
+$footer-fa-font-size: calc(#{$footer-min-height} / 1.84);
 
-// Theme Variables
-//
-// Theme Variables should follow the `$theme-component-state-property` formula for consistent
-// variable naming.  Ex: $dark-nav-link-disabled-color and $light-modal-content-box-bg.  Each theme
-// should share the same variables, to allow for a consistent look across multiple themes. Lastly,
-// theme variables should only conisit of color-related variables.
+/**
+* Theme Variables
+*
+* Theme Variables should follow the `$theme-component-state-property` formula for consistent
+* variable naming.  Ex: $dark-nav-link-disabled-color and $light-modal-content-box-bg.  Each theme
+* should share the same variables, to allow for a consistent look across multiple themes. Lastly,
+* theme variables should only conisit of color-related variables.
+*/
 
-// Convert light/dark theme with these tools:
-// 1. http://www.mattlag.com/scripting/hexcolorinverter.php
-// 2. https://www.color-hex.com
+/**
+* Convert light/dark theme with these tools:
+*
+* 1. http://www.mattlag.com/scripting/hexcolorinverter.php
+* 2. https://www.color-hex.com
+*/
 
 // Brand Colors
-$brand-primary:                                     rgb(8, 170, 220);
-$brand-nightMode:                                   rgb(220, 163, 8);
+$brand-primary: rgb(8, 170, 220);
+$brand-nightMode: rgb(220, 163, 8);
 
 // Global Theme Colors
-$light:                                             rgba(232, 228, 224, 1);
-$grey-100:                                          rgba(210, 208, 204, 1);
-$grey-900:                                          rgba(55, 57, 61, 1);
-$dark:                                              rgba(33, 37, 41, 1);
+$light: rgba(232, 228, 224, 1);
+$grey-100: rgba(210, 208, 204, 1);
+$grey-900: rgba(55, 57, 61, 1);
+$dark: rgba(33, 37, 41, 1);
 
+/**
+* Light Theme
+*/
 
-// Light Theme
-//
-//
 // Global App Colors
-$light-app-bg:                                      $light;
-$light-app-text-color:                              $dark;
+$light-app-bg: $light;
+$light-app-text-color: $dark;
 
 // Links
-$light-app-link-color:                              lighten($light-app-text-color, 25%);
-$light-app-link-color-hover:                        $light-app-text-color;
+$light-app-link-color: lighten($light-app-text-color, 25%);
+$light-app-link-color-hover: $light-app-text-color;
 
 // Navbar Colors
-$light-navbar-bg:                                   $grey-100;
+$light-navbar-bg: $grey-100;
 
 // Footer Colors
-$light-footer-bg:                                   darken($light-navbar-bg, 10%);
-$light-footer-text-color:                           darken($light-app-text-color, 25%);
+$light-footer-bg: darken($light-navbar-bg, 10%);
+$light-footer-text-color: darken($light-app-text-color, 25%);
 
-
-// Dark Theme
-//
-//
+/**
+* Dark Theme
+*/
 // Global App Colors
-$dark-app-bg:                                       $dark;
-$dark-app-text-color:                               $light;
+$dark-app-bg: $dark;
+$dark-app-text-color: $light;
 
 // Links
-$dark-app-link-color:                               darken($dark-app-text-color, 25%);
-$dark-app-link-color-hover:                         $dark-app-text-color;
+$dark-app-link-color: darken($dark-app-text-color, 25%);
+$dark-app-link-color-hover: $dark-app-text-color;
 
 // Navbar Colors
-$dark-navbar-bg:                                    $grey-900;
+$dark-navbar-bg: $grey-900;
 
 // Footer Colors
-$dark-footer-bg:                                    darken($dark-navbar-bg, 10%);
-$dark-footer-text-color:                            darken($dark-app-text-color, 25%);
+$dark-footer-bg: darken($dark-navbar-bg, 10%);
+$dark-footer-text-color: darken($dark-app-text-color, 25%);
