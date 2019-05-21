@@ -4,11 +4,11 @@ import { FaTasks } from 'react-icons/fa';
 import { IoMdAdd, IoMdSettings } from 'react-icons/io';
 import gql from 'graphql-tag';
 import { Query, Mutation } from 'react-apollo';
-
+import { ApolloError } from 'apollo-boost';
 import CustomButton from '../CustomButton';
 import SettingsMenu from '../SettingsMenu/SettingsMenu';
 import './Navbar.scss';
-import { ApolloError } from 'apollo-boost';
+
 
 const USER_NAME_QUERY = gql`
   query UserNameQuery {
@@ -88,15 +88,15 @@ class Navbar extends Component<Props, State> {
                 <CustomButton
                   content={
                     <IoMdAdd className="icon" />
-              }
+                  }
                   onClick={createDummyTaskMutation}
                 />
               )}
             </Mutation>
 
           ) : (
-            null
-          )}
+              null
+            )}
           <CustomButton
             content={
               <IoMdSettings className="icon" />

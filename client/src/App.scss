@@ -2,41 +2,48 @@
 
 #app-root {
   @include theme($themes) {
-    background-color:                               themed('app-bg');
-    color:                                          themed('app-text-color');
+    background-color: themed("app-bg");
+    color: themed("app-text-color");
   }
 
   a {
     @include theme($themes) {
-      color:                                        themed('app-link-color');
+      color: themed("app-link-color");
     }
 
     & :hover {
       @include theme($themes) {
-        color:                                      themed('app-link-hover-color');
+        color: themed("app-link-hover-color");
       }
     }
   }
 
-  a, .btn, .fa {
-    transition:                                     $link-color-transition;
-    -o-transition:                                  $link-color-transition;
-    -moz-transition:                                $link-color-transition;
-    -webkit-transition:                             $link-color-transition;
+  a,
+  .btn,
+  .fa {
+    transition: $link-color-transition;
+    -o-transition: $link-color-transition;
+    -moz-transition: $link-color-transition;
+    -webkit-transition: $link-color-transition;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-weight:                                    $app-headings-font-weigth;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: $app-headings-font-weigth;
   }
 
   .icon {
-    font-size:                                      $icon-font-size;
-    min-height:                                     $icon-font-size;
-    min-width:                                      $icon-font-size;
-    vertical-align:                                 middle;
+    font-size: $icon-font-size;
+    min-height: $icon-font-size;
+    min-width: $icon-font-size;
+    vertical-align: middle;
   }
 
   .text-brand-primary {
-    color:                                          $brand-primary;
+    color: $brand-primary;
   }
 }

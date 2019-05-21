@@ -1,19 +1,19 @@
 @import "../../scss/themes";
 
 .task {
-  min-height:                                       $task-min-height;
-  border-bottom:                                    $task-border-bottom;
-  opacity:                                          $task-done-opacity;
+  min-height: $task-min-height;
+  border-bottom: $task-border-bottom;
+  opacity: $task-done-opacity;
   @include theme($themes) {
-    border-bottom-color:                            rgba(themed('app-text-color'), .15);
+    border-bottom-color: rgba(themed("app-text-color"), 0.15);
   }
 
   &.tasks2do {
-    opacity:                                        1;
+    opacity: 1;
   }
 
   .completed {
-    margin-right:                                   $task-col-inner-margin;
+    margin-right: $task-col-inner-margin;
   }
 
   // .taskName {
@@ -22,13 +22,12 @@
 
   .dueDate {
     // This is to match the react-icon "padding".
-    margin-right:                                   2px;
-    margin-left:                                    $task-col-inner-margin;
-    font-size:                                      $task-date-font-size;
+    margin-right: 2px;
+    margin-left: $task-col-inner-margin;
+    font-size: $task-date-font-size;
 
     @include theme($themes) {
-      color:                                        rgba(themed('app-text-color'), .65);
+      color: rgba(themed("app-text-color"), 0.65);
     }
   }
-
 }

@@ -2,47 +2,47 @@
 
 .customButton {
   @include theme($themes) {
-    color:                                          rgba(themed('app-text-color'), .75);
+    color: rgba(themed("app-text-color"), 0.75);
   }
 
   &.transparentButton {
     @include theme($themes) {
-      background-color:                             rgba(themed('app-text-color'), 0);
+      background-color: rgba(themed("app-text-color"), 0);
     }
 
     &:hover {
-      color:                                        $brand-primary;
+      color: $brand-primary;
 
       @include theme($themes) {
-        background-color:                           rgba(themed('app-text-color'), .125);
+        background-color: rgba(themed("app-text-color"), 0.125);
       }
     }
   }
 
   &.completed {
-    padding:                                        $custom-button-completed-padding;
+    padding: $custom-button-completed-padding;
 
     &:hover {
-      color:                                        $brand-primary;
+      color: $brand-primary;
     }
   }
 
   &:focus {
-    box-shadow:                                     $custom-button-focus-outline !important;
+    box-shadow: $custom-button-focus-outline !important;
   }
 
   .icon {
     // Fixes alignment issue with react-icons + bootstrap
-    margin-bottom:                                  2px;
+    margin-bottom: 2px;
   }
 
   .nightMode {
-    color:                                          $brand-nightMode;
+    color: $brand-nightMode;
   }
-  
+
   .button-content {
     display: inline-flex;
-    width:                                          100%;
+    width: 100%;
     align-content: center;
   }
 }

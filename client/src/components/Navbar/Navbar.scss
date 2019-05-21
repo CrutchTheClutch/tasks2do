@@ -1,23 +1,23 @@
 @import "../../scss/themes";
 
 .navbar {
-  min-height:                                       $navbar-min-height;
-  padding:                                          $navbar-padding;
+  min-height: $navbar-min-height;
+  padding: $navbar-padding;
 
   @include theme($themes) {
-    background-color:                               themed('navbar-bg');
+    background-color: themed("navbar-bg");
   }
 
-  .logo  {
+  .logo {
     .icon {
-      font-size:                                    $navbar-icon-font-size;
-      margin-right:                                 $navbar-icon-margin-right;
+      font-size: $navbar-icon-font-size;
+      margin-right: $navbar-icon-margin-right;
     }
-  
+
     .brandName {
-      font-size:                                    $navbar-brandName-font-size;
-      line-height:                                  $navbar-brandName-line-height;
-      margin-bottom:                                $navbar-brandName-margin-bottom;
+      font-size: $navbar-brandName-font-size;
+      line-height: $navbar-brandName-line-height;
+      margin-bottom: $navbar-brandName-margin-bottom;
     }
 
     &:hover {
@@ -26,6 +26,6 @@
   }
 
   .customButton + .customButton {
-    margin-left:                                    $app-button-horizontal-gap
+    margin-left: $app-button-horizontal-gap;
   }
 }

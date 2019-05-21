@@ -34,7 +34,7 @@ class Task extends Component<Props, State> {
     taskName: PropTypes.string.isRequired,
     dueDate: PropTypes.string,
   };
-  
+
   static defaultProps = {
     dueDate: null,
   };
@@ -78,8 +78,8 @@ class Task extends Component<Props, State> {
           content={completed ? (
             <IoMdCheckmarkCircle className="icon text-brand-primary" />
           ) : (
-            <IoIosRadioButtonOff className="icon" />
-          )}
+              <IoIosRadioButtonOff className="icon" />
+            )}
           onClick={this.toggleCompleted}
         />
         <div className="taskName col flex-grow-1">
@@ -91,18 +91,18 @@ class Task extends Component<Props, State> {
             {dueDate}
           </div>
         ) : (
-          <Mutation mutation={DELETE_TASK_MUTATION} variables={{ id }}>
-            {(deleteTaskMutation: Function) => (
-              <CustomButton
-                className="completed"
-                content={
-                  <IoMdCloseCircle className="icon" />
-                }
-                onClick={deleteTaskMutation}
-              />
-            )}
-          </Mutation>
-        )}
+            <Mutation mutation={DELETE_TASK_MUTATION} variables={{ id }}>
+              {(deleteTaskMutation: Function) => (
+                <CustomButton
+                  className="completed"
+                  content={
+                    <IoMdCloseCircle className="icon" />
+                  }
+                  onClick={deleteTaskMutation}
+                />
+              )}
+            </Mutation>
+          )}
       </div>
     );
   }

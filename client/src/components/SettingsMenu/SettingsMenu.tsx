@@ -22,7 +22,7 @@ class SettingsMenu extends Component<Props, {}> {
     updateTheme: PropTypes.func.isRequired,
     userName: PropTypes.string,
   };
-  
+
   static defaultProps = {
     isOpen: false,
     loggedIn: false,
@@ -67,16 +67,16 @@ class SettingsMenu extends Component<Props, {}> {
               onClick={this.toggleNightMode}
             />
           ) : (
-            <CustomButton
-              content={(
-                <div className="align-items-center d-inline-flex">
-                  <IoMdPerson className="icon" />
-                  <div className="menu-item-text text-break-all">Login</div>
-                </div>
-              )}
-              onClick={this.toggleNightMode}
-            />
-          )}
+              <CustomButton
+                content={(
+                  <div className="align-items-center d-inline-flex">
+                    <IoMdPerson className="icon" />
+                    <div className="menu-item-text text-break-all">Login</div>
+                  </div>
+                )}
+                onClick={this.toggleNightMode}
+              />
+            )}
           <CustomButton
             content={(
               <div className="align-items-center d-inline-flex">
