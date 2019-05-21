@@ -7,6 +7,12 @@
     "prettier/@typescript-eslint"
   ],
   "env": {
+    // Define globals exposed by modern browsers.
+    "browser": true,
+
+    // Allows ES6
+    "es6": true,
+
     // Define globals exposed by Jest
     "jest": true
   },
