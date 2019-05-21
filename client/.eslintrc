@@ -40,7 +40,8 @@
 				]
 			}
 		],
-		"react/jsx-wrap-multilines": "never"
+		"react/jsx-wrap-multilines": "never",
+		"react/destructuring-assignment": ["always", { "ignoreClassFields": true }],
 	},
 	"settings": {
 		"import/resolver": {
