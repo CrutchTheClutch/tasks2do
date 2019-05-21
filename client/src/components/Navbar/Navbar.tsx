@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { ApolloError } from 'apollo-boost';
+import gql from 'graphql-tag';
+import { Mutation, Query } from 'react-apollo';
 import { FaTasks } from 'react-icons/fa';
 import { IoMdAdd, IoMdSettings } from 'react-icons/io';
-import gql from 'graphql-tag';
-import { Query, Mutation } from 'react-apollo';
-import { ApolloError } from 'apollo-boost';
 import CustomButton from '../CustomButton';
 import SettingsMenu from '../SettingsMenu/SettingsMenu';
 import './Navbar.scss';
@@ -39,21 +38,13 @@ interface State {
   isOpen: boolean;
 }
 
-class Navbar extends Component<Props, State> {
-  static propTypes = {
-    name: PropTypes.string, // Dummy Value
-    dueDate: PropTypes.string, // Dummy Value
-    loggedIn: PropTypes.bool.isRequired,
-    nightMode: PropTypes.bool.isRequired,
-    updateTheme: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
+class Navbar extends React.Component<Props, State> {
+  public static defaultProps = {
     name: 'New Task!', // Dummy Value
     dueDate: '1557681923261', // Dummy Value
   };
 
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
     this.toggleSettingsMenu = this.toggleSettingsMenu.bind(this);
     this.state = {
@@ -61,14 +52,14 @@ class Navbar extends Component<Props, State> {
     };
   }
 
-  toggleSettingsMenu() {
+  public toggleSettingsMenu(): void {
     const { isOpen } = this.state;
     this.setState({
       isOpen: !isOpen,
     });
   }
 
-  render() {
+  public render(): JSX.Element {
     const { name, dueDate, loggedIn, nightMode, updateTheme } = this.props;
     const { isOpen } = this.state;
 
@@ -84,7 +75,7 @@ class Navbar extends Component<Props, State> {
         <div className="col-5 col-sm-3 col-md-3 p-0 text-right">
           {loggedIn ? (
             <Mutation mutation={CREATE_DUMMY_TASK_MUTATION} variables={{ name, dueDate }}>
-              {(createDummyTaskMutation: Function) => (
+              {(createDummyTaskMutation: Function): JSX.Element | null => (
                 <CustomButton
                   content={
                     <IoMdAdd className="icon" />
@@ -104,7 +95,7 @@ class Navbar extends Component<Props, State> {
             onClick={this.toggleSettingsMenu}
           />
           <Query query={USER_NAME_QUERY}>
-            {({ loading, error, data }: { loading: boolean; error?: ApolloError; data: any; }) => {
+            {({ loading, error, data }: { loading: boolean; error?: ApolloError; data: any; }): JSX.Element => {
               if (loading) return <h4>Loading...</h4>;
               if (error) return <h4>Error</h4>;
               return (
