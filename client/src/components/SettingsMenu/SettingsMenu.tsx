@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { IoIosMoon, IoMdArrowDropup, IoMdPerson } from 'react-icons/io';
-
+import MenuItem from '../MenuItem';
 import './SettingsMenu.scss';
-
-import CustomButton from '../CustomButton';
 
 interface Props {
   isOpen?: boolean;
   loggedIn?: boolean;
   nightMode?: boolean;
   updateTheme: Function;
-  userName?: string;
+  userName: string;
 }
 
 class SettingsMenu extends Component<Props, {}> {
@@ -52,35 +50,15 @@ class SettingsMenu extends Component<Props, {}> {
           <IoMdArrowDropup className="dropdown-caret outline" />
           <IoMdArrowDropup className="dropdown-caret fill" />
           {loggedIn ? (
-            <CustomButton
-              content={
-                <div className="align-items-center d-inline-flex">
-                  <IoMdPerson className="icon" />
-                  <div className="menu-item-text text-break-all">
-                    {userName}
-                  </div>
-                </div>
-              }
-              onClick={this.toggleNightMode}
-            />
+            <MenuItem icon={<IoMdPerson className="icon" />} text={userName} />
           ) : (
-            <CustomButton
-              content={
-                <div className="align-items-center d-inline-flex">
-                  <IoMdPerson className="icon" />
-                  <div className="menu-item-text text-break-all">Login</div>
-                </div>
-              }
-              onClick={this.toggleNightMode}
-            />
+            <MenuItem icon={<IoMdPerson className="icon" />} text="Login" />
           )}
-          <CustomButton
-            content={
-              <div className="align-items-center d-inline-flex">
-                <IoIosMoon className={`icon${nightMode ? ' nightMode' : ''}`} />
-                <div className="menu-item-text">Night Mode</div>
-              </div>
+          <MenuItem
+            icon={
+              <IoIosMoon className={`icon${nightMode ? ' nightMode' : ''}`} />
             }
+            text="Night Mode"
             onClick={this.toggleNightMode}
           />
         </div>
