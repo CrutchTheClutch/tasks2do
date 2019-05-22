@@ -4,7 +4,7 @@
 * Global App settings.
 */
 $app-min-height: 100%;
-$app-min-width: 265px;
+$app-min-width: 270px;
 $app-line-height: 1;
 $app-word-break: break-word;
 $app-headings-font-weigth: 400;
@@ -35,19 +35,7 @@ $navbar-brandName-margin-bottom: 0.125em;
 */
 $settings-menu-padding: 0.25rem 0;
 $settings-menu-min-width: 15rem;
-$settings-menu-border: 1px solid;
 $settings-menu-box-shadow: rgba(0, 0, 0, 0.6) 4px 4px 8px -1px;
-
-$settings-menu-button-border-radius: 0;
-$settings-menu-custom-button-text-align: left;
-
-$settings-menu-menu-item-text-margin-left: 0.5rem;
-$settings-menu-menu-item-text-font-size: 0.875rem;
-
-$setttings-menu-item-height: 1.75rem;
-$setttings-menu-item-width: 100%;
-$setttings-menu-item-padding: 0.25rem 0.5rem;
-$setttings-menu-item-line-height: 1;
 
 $setttings-menu-caret-padding: 0;
 $setttings-menu-caret-fill-size: 2em;
@@ -55,7 +43,7 @@ $setttings-menu-caret-outline-size: calc(
   #{$setttings-menu-caret-fill-size} + 0.1em
 );
 
-$setttings-menu-caret-fill-top: -1.25em; //-0.74707rem;
+$setttings-menu-caret-fill-top: -1.25em;
 $setttings-menu-caret-fill-right: 0.35em;
 
 $setttings-menu-caret-outline-top: calc(
@@ -64,6 +52,21 @@ $setttings-menu-caret-outline-top: calc(
 $setttings-menu-caret-outline-right: calc(
   #{$setttings-menu-caret-fill-right} - 0.04675em
 );
+
+/**
+* Menu Item
+* 
+* Menu Item settings.
+*/
+$menu-item-height: 1.75rem;
+$menu-item-width: 100%;
+$menu-item-padding: 0.4rem 0.5rem;
+$menu-item-line-height: 1;
+$menu-item-border-radius: 0;
+
+$menu-item-text-align: left;
+$menu-item-text-font-size: 0.875rem;
+$menu-item-text-margin-left: 0.5rem;
 
 /**
 * Custom Button
