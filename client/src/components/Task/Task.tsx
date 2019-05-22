@@ -38,7 +38,8 @@ class Task extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
-    this.toggleHover = this.toggleHover.bind(this);
+    this.enableHover = this.enableHover.bind(this);
+    this.disableHover = this.disableHover.bind(this);
     this.state = {
       completed: this.props.completed,
       hover: false,
@@ -52,10 +53,15 @@ class Task extends Component<Props, State> {
     });
   }
 
-  public toggleHover(): void {
-    const { hover } = this.state;
+  public enableHover(): void {
     this.setState({
-      hover: !hover,
+      hover: true,
+    });
+  }
+
+  public disableHover(): void {
+    this.setState({
+      hover: false,
     });
   }
 
@@ -68,8 +74,8 @@ class Task extends Component<Props, State> {
         className={`task row no-gutters align-items-center ${
           completed ? '' : 'tasks2do'
         }`}
-        onMouseEnter={this.toggleHover}
-        onMouseLeave={this.toggleHover}
+        onMouseEnter={this.enableHover}
+        onMouseLeave={this.disableHover}
       >
         <CustomButton
           className="completed"
