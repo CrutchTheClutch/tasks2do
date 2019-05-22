@@ -26,6 +26,7 @@
   }
 
   .text {
+    margin-top: 1px; // Fixes alignent with icon
     margin-left: $menu-item-text-margin-left;
     font-size: $menu-item-text-font-size;
 
