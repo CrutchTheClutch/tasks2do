@@ -3,6 +3,7 @@
 .menu-item {
   @include theme($themes) {
     background-color: rgba(themed("app-text-color"), 0);
+    color: rgba(themed("app-text-color"), 0.5);
   }
 
   border: 0;
@@ -12,7 +13,7 @@
   width: $menu-item-width;
 
   &:hover {
-    color: $brand-primary;
+    color: $brand-primary !important;
 
     @include theme($themes) {
       background-color: rgba(themed("app-text-color"), 0.125);
