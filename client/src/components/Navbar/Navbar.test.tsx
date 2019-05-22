@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 
 describe('Navbar', (): void => {
   it('renders without crashing', (): void => {
-    const navbar = <Navbar loggedIn nightMode updateTheme={(): void => { }} />
+    const navbar = <Navbar loggedIn nightMode updateTheme={(): void => {}} />;
     shallow(navbar);
   });
 });

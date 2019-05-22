@@ -4,7 +4,7 @@ import SettingsMenu from './SettingsMenu';
 
 describe('SettingsMenu', (): void => {
   it('renders without crashing', (): void => {
-    const settingsMenu = <SettingsMenu updateTheme={(): void => { }} />
+    const settingsMenu = <SettingsMenu updateTheme={(): void => {}} />;
     shallow(settingsMenu);
   });
 });
