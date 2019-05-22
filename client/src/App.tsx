@@ -35,11 +35,11 @@ class App extends React.Component<Props, State> {
   }
 
   /**
-  * Update's App overall theme.
-  *
-  * Call this function with a theme name as an argument.
-  * Ex: this.updateTheme('light'); or this.updateTheme('dark');
-  */
+   * Update's App overall theme.
+   *
+   * Call this function with a theme name as an argument.
+   * Ex: this.updateTheme('light'); or this.updateTheme('dark');
+   */
   public updateTheme(newThemeName: string): void {
     const { themePrefix } = this.props;
     const { nightMode, themeName } = this.state;
@@ -50,8 +50,8 @@ class App extends React.Component<Props, State> {
       return;
     }
 
-    const oldTheme = (`${themePrefix}${themeName}`);
-    const newTheme = (`${themePrefix}${newThemeName}`);
+    const oldTheme = `${themePrefix}${themeName}`;
+    const newTheme = `${themePrefix}${newThemeName}`;
 
     if (root.classList.contains(`${oldTheme}`)) {
       root.classList.remove(oldTheme);

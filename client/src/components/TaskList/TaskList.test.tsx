@@ -4,7 +4,7 @@ import TaskList from './TaskList';
 
 describe('TaskList', (): void => {
   it('renders without crashing', (): void => {
-    const taskList = <TaskList />
+    const taskList = <TaskList />;
     shallow(taskList);
   });
 });
