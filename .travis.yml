@@ -8,15 +8,10 @@ cache:
 env:
 - DIR=client
 - DIR=server
-if: branch = cd-pipeline
-  env:
-    - MASTER=true
 script: npm test
 branches:
   only:
-  - cd-pipeline
-  #- master
-  #- dev
+  - master
 before_install: cd $DIR
 install: npm install
 deploy:
@@ -24,6 +19,4 @@ deploy:
   api_key:
     secure: cTYhUSpsTEGpgpHz4yPKCamiIix4VgVdxKq0gKtqi1MkFfl10nLbGjysU/XH6QNX1oa+19DIfmybwVBmuUKJ3KWqtbNapdInJOknci+YDLBQcgiAjvIDL6Yepe1G+5AaEKUE6AEJL0eqQg9WIlGpJSMIP/xI5iVGL2zohgGj5+x0lnWypTIKFxKfte1Hwu4yeayAj8gfJB90hddC6lz2otznAJrGnzQW0JwHQrwN9Cn81iAq8jMBW9WAxSm06wczg0VoVuuF2f76KxhJD1nAwKOkBCS5Qgk2hlkYMjsZmvSowHeRH3NRJSXl/2zOB4XeSi40Kks86gw+EGfZ2QOy9YKpS3+T6iorN7wqhQfFkPUikFqdNhlBK2FMEiwpISlmeTN5b2A26nfDRbvyEiJY5LBTpZxL8mmBgtSURvjAwVkSNOxadqCE4zTtK4Zlym2raNUQ/n0b5t78iCe3iE52AEe5y/uro98n4bIfqxayRbUvTLTsZmYuE/aKNEnnFZamQotvJ3b17n1G+dIIDqHW9hNI1ZxOH68y75rQ6tZJd7jh2f+7kOS1dzMXvuQSeU8mKX1meeAgra0tkfeqpO34SP1b2WPlNYEfkrwkJ0MO6dIG0quJPOHx8lGxv8CtH28mKm6XAsLcZBQ2EG/jAoiUrTBt3/gsGtCnocQDtcXQV5I=
   app:
-    cd-pipeline: tasks2do-$DIR
-    #master: tasks2do-$DIR
-    #dev: tasks2do-$DIR-dev
+    master: tasks2do-$DIR
