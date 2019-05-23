@@ -22,8 +22,13 @@ import { isAuth } from './middleware';
     const app = express();
 
     const IN_PROD = process.env.NODE_ENV === 'production';
-    const BRANCH = (process.env.MASTER ? "https://tasks2do-client.herokuapp.com" : "https://tasks2do-client-dev.herokuapp.com")
-    const ORIGIN = (IN_PROD ? BRANCH : "https://localhost:3000");
+    const ORIGIN = IN_PROD
+      ? [
+          'https://tasks2do-client.herokuapp.com',
+          'https://www.tasks2do.com',
+          'http://www.tasks2do.com',
+        ]
+      : 'https://localhost:3000';
 
     app.disable('x-powered-by');
     app.use(cors({
