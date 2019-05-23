@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Navbar from './Navbar';
 
-describe('Navbar', () => {
-  it('renders without crashing', () => {
-    const navbar = <Navbar loggedIn={true} nightMode={true} updateTheme={() => {}}/>
+describe('Navbar', (): void => {
+  it('renders without crashing', (): void => {
+    const navbar = <Navbar loggedIn nightMode updateTheme={(): void => {}} />;
     shallow(navbar);
   });
 });

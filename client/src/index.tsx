@@ -6,8 +6,13 @@ import ApolloClient from 'apollo-boost';
 import App from './App';
 import './index.scss';
 
+const IN_PROD = process.env.NODE_ENV === 'production';
+const URI = IN_PROD
+  ? 'https://tasks2do-server.herokuapp.com/graphql'
+  : 'https://localhost:4000';
+
 const client = new ApolloClient({
-  uri: 'https://tasks2do-server.herokuapp.com/graphql',
+  uri: URI,
 });
 
 const WrappedApp = (

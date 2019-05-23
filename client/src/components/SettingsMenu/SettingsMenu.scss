@@ -1,73 +1,43 @@
 @import "../../scss/themes";
 
 .settings-menu {
-  padding:                                          $settings-menu-padding;
-  min-width:                                        $settings-menu-min-width;
-  max-width:                                        100%;
-  border:                                           $settings-menu-border;
-  box-shadow:                                       $settings-menu-box-shadow;
+  padding: $settings-menu-padding !important;
+  min-width: $settings-menu-min-width !important;
+  max-width: 100%;
+  box-shadow: $settings-menu-box-shadow;
 
   @include theme($themes) {
-    border-color:                                   themed('app-bg');
+    border-color: themed("app-bg");
   }
 
   @include theme($themes) {
-    background-color:                               themed('navbar-bg');
-  }
-
-  .customButton {
-    border-radius:                                  $settings-menu-button-border-radius;
-    text-align:                                     $settings-menu-custom-button-text-align;
-
-    + .customButton {
-      margin-left:                                  0 !important;  // Ignore rule from 'Navbar.scss'
-    }
-  }
-
-  .icon {
-    ~ .menu-item-text {
-      margin-left:                                  $settings-menu-menu-item-text-margin-left;
-      font-size:                                    $settings-menu-menu-item-text-font-size;
-    }
-  }
-
-  > * {
-    min-height:                                     $setttings-menu-item-height;
-    width:                                          $setttings-menu-item-width;
-    padding:                                        $setttings-menu-item-padding;
-    line-height:                                    $setttings-menu-item-line-height;
-  }
-
-  .menu-item-text {
-    @include theme($themes) {
-      color:                                        themed('app-text-color');
-    }
+    background-color: themed("navbar-bg");
   }
 
   .dropdown-caret {
-    padding:                                        $setttings-menu-caret-padding;
-    position:                                       absolute;
-    pointer-events:                                 none;
+    padding: $setttings-menu-caret-padding;
+    position: absolute;
+    pointer-events: none;
 
     &.fill {
-      height:                                       $setttings-menu-caret-fill-size;
-      width:                                        $setttings-menu-caret-fill-size;
-      top:                                          $setttings-menu-caret-fill-top;
-      right:                                        $setttings-menu-caret-fill-right;
+      height: $setttings-menu-caret-fill-size;
+      width: $setttings-menu-caret-fill-size;
+      top: $setttings-menu-caret-fill-top;
+      right: $setttings-menu-caret-fill-right;
 
       @include theme($themes) {
-        color:                                      themed('navbar-bg');
+        color: themed("navbar-bg");
       }
     }
 
     &.outline {
-      height:                                       $setttings-menu-caret-outline-size;
-      width:                                        $setttings-menu-caret-outline-size;
-      top:                                          $setttings-menu-caret-outline-top;
-      right:                                        $setttings-menu-caret-outline-right;
+      height: $setttings-menu-caret-outline-size;
+      width: $setttings-menu-caret-outline-size;
+      top: $setttings-menu-caret-outline-top;
+      right: $setttings-menu-caret-outline-right;
 
       @include theme($themes) {
-        color:                                      themed('app-bg');
+        color: themed("app-bg");
       }
     }
   }

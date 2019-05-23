@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+import * as React from 'react';
+import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import TaskList from './components/TaskList';
-import Footer from './components/Footer';
 import './App.scss';
 
 interface Props {
-  themePrefix?: string;
+  themePrefix: string;
 }
 
 interface State {
@@ -16,17 +14,12 @@ interface State {
   themeName: string;
 }
 
-class App extends Component<Props, State> {
-  static propTypes = {
-    themePrefix: PropTypes.string,
-  };
-
-  static defaultProps = {
+class App extends React.Component<Props, State> {
+  public static defaultProps = {
     themePrefix: 'theme-',
   };
-  login: any;
 
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
     this.updateTheme = this.updateTheme.bind(this);
     this.state = {
@@ -36,15 +29,18 @@ class App extends Component<Props, State> {
     };
   }
 
-  componentDidMount() {
-    this.updateTheme(this.state.themeName);
+  public componentDidMount(): void {
+    const { themeName } = this.state;
+    this.updateTheme(themeName);
   }
 
-  // Update's App overall theme.
-  //
-  // Call this function with a theme name as an argument.
-  // Ex: this.updateTheme('light'); or this.updateTheme('dark');
-  updateTheme(newThemeName: string) {
+  /**
+   * Update's App overall theme.
+   *
+   * Call this function with a theme name as an argument.
+   * Ex: this.updateTheme('light'); or this.updateTheme('dark');
+   */
+  public updateTheme(newThemeName: string): void {
     const { themePrefix } = this.props;
     const { nightMode, themeName } = this.state;
 
@@ -54,8 +50,8 @@ class App extends Component<Props, State> {
       return;
     }
 
-    const oldTheme = (`${themePrefix}${themeName}`);
-    const newTheme = (`${themePrefix}${newThemeName}`);
+    const oldTheme = `${themePrefix}${themeName}`;
+    const newTheme = `${themePrefix}${newThemeName}`;
 
     if (root.classList.contains(`${oldTheme}`)) {
       root.classList.remove(oldTheme);
@@ -70,7 +66,7 @@ class App extends Component<Props, State> {
     }
   }
 
-  render() {
+  public render(): JSX.Element {
     const { loggedIn, nightMode } = this.state;
 
     return (

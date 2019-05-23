@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
-import { Query, QueryResult } from 'react-apollo';
+import { Query } from 'react-apollo';
 import moment from 'moment';
-
+import { ApolloError } from 'apollo-boost';
 import Task from '../Task';
 import './TaskList.scss';
-import { ApolloError } from 'apollo-boost';
 
 const TASKS_QUERY = gql`
   query TasksQuery {
-    user(id:"5cd7f0d68ec310afd9a2f7a5") {
+    user(id: "5cd7f0d68ec310afd9a2f7a5") {
       id
       tasks {
         id
@@ -22,30 +21,43 @@ const TASKS_QUERY = gql`
 `;
 
 class TaskList extends Component {
-  convertDate(dueDate: string) {
-    const milli = parseInt(dueDate);
+  public static convertDate(dueDate: string): string {
+    const milli = parseInt(dueDate, 10);
     const formattedDate = moment(milli).format('MMM DD, YYYY');
     return formattedDate;
   }
 
-  render() {
+  public render(): JSX.Element {
     return (
       <div className="taskList col-12 d-table">
         <Query query={TASKS_QUERY}>
-          {({ loading, error, data }: { loading: boolean; error?: ApolloError; data: any; }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean;
+            error?: ApolloError;
+            data: any;
+          }): JSX.Element => {
             if (loading) return <h4>Loading...</h4>;
             if (error) return <h4>Error</h4>;
 
-            return (
-              data.user.tasks.map((task: { id: string; completed: boolean; name: string; dueDate: string; }) => (
+            return data.user.tasks.map(
+              (task: {
+                id: string;
+                completed: boolean;
+                name: string;
+                dueDate: string;
+              }): JSX.Element => (
                 <Task
                   key={task.id}
                   id={task.id}
                   completed={task.completed}
                   taskName={task.name}
-                  dueDate={this.convertDate(task.dueDate)}
+                  dueDate={TaskList.convertDate(task.dueDate)}
                 />
-              ))
+              ),
             );
           }}
         </Query>

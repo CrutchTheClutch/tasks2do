@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { IoMdCheckmarkCircle, IoIosRadioButtonOff, IoMdCloseCircle } from 'react-icons/io';
+import {
+  IoMdCheckmarkCircle,
+  IoIosRadioButtonOff,
+  IoMdCloseCircle,
+} from 'react-icons/io';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 
@@ -28,76 +31,73 @@ interface State {
 }
 
 class Task extends Component<Props, State> {
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired,
-    taskName: PropTypes.string.isRequired,
-    dueDate: PropTypes.string,
-  };
-  
-  static defaultProps = {
+  public static defaultProps = {
     dueDate: null,
   };
 
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
-    this.toggleHover = this.toggleHover.bind(this);
+    this.enableHover = this.enableHover.bind(this);
+    this.disableHover = this.disableHover.bind(this);
     this.state = {
       completed: this.props.completed,
       hover: false,
     };
   }
 
-  toggleCompleted() {
+  public toggleCompleted(): void {
     const { completed } = this.state;
     this.setState({
       completed: !completed,
     });
   }
 
-  toggleHover() {
-    const { hover } = this.state;
+  public enableHover(): void {
     this.setState({
-      hover: !hover,
+      hover: true,
     });
   }
 
-  render() {
+  public disableHover(): void {
+    this.setState({
+      hover: false,
+    });
+  }
+
+  public render(): JSX.Element {
     const { id, taskName, dueDate } = this.props;
     const { completed, hover } = this.state;
 
     return (
       <div
-        className={`task row no-gutters align-items-center ${completed ? '' : 'tasks2do'}`}
-        onMouseEnter={this.toggleHover}
-        onMouseLeave={this.toggleHover}
+        className={`task row no-gutters align-items-center ${
+          completed ? '' : 'tasks2do'
+        }`}
+        onMouseEnter={this.enableHover}
+        onMouseLeave={this.disableHover}
       >
         <CustomButton
           className="completed"
-          content={completed ? (
-            <IoMdCheckmarkCircle className="icon text-brand-primary" />
-          ) : (
-            <IoIosRadioButtonOff className="icon" />
-          )}
+          content={
+            completed ? (
+              <IoMdCheckmarkCircle className="icon text-brand-primary" />
+            ) : (
+              <IoIosRadioButtonOff className="icon" />
+            )
+          }
           onClick={this.toggleCompleted}
         />
-        <div className="taskName col flex-grow-1">
-          {taskName}
-        </div>
+        <div className="taskName col flex-grow-1">{taskName}</div>
 
         {!hover ? (
-          <div className="dueDate col-auto">
-            {dueDate}
-          </div>
+          <div className="dueDate col-auto">{dueDate}</div>
         ) : (
           <Mutation mutation={DELETE_TASK_MUTATION} variables={{ id }}>
-            {(deleteTaskMutation: Function) => (
+            {(deleteTaskMutation: Function): JSX.Element => (
               <CustomButton
                 className="completed"
-                content={
-                  <IoMdCloseCircle className="icon" />
-                }
+                content={<IoMdCloseCircle className="icon" />}
                 onClick={deleteTaskMutation}
               />
             )}

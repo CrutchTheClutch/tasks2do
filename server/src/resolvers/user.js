@@ -1,7 +1,6 @@
 import { compare, hash } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import { JWT_KEY } from '../config';
 import { User } from '../models';
 
 export default {
@@ -33,7 +32,7 @@ export default {
       // sign JWT
       const token = jwt.sign(
         { userId: user.id, email: user.email },
-        JWT_KEY,
+        process.env.JWT_KEY,
         {
           expiresIn: '1h'
         }

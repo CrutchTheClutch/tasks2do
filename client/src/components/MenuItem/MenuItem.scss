@@ -1,0 +1,41 @@
+@import "../../scss/themes";
+
+.menu-item {
+  @include theme($themes) {
+    background-color: rgba(themed("app-text-color"), 0);
+    color: rgba(themed("app-text-color"), 0.5);
+  }
+
+  border: 0;
+  border-radius: $menu-item-border-radius;
+  text-align: $menu-item-text-align;
+  padding: $menu-item-padding;
+  width: $menu-item-width;
+
+  &:hover {
+    color: $brand-primary !important;
+
+    @include theme($themes) {
+      background-color: rgba(themed("app-text-color"), 0.125);
+    }
+  }
+
+  &:focus {
+    box-shadow: 0 !important;
+    outline: 0;
+  }
+
+  .text {
+    margin-top: 1px; // Fixes alignent with icon
+    margin-left: $menu-item-text-margin-left;
+    font-size: $menu-item-text-font-size;
+
+    @include theme($themes) {
+      color: themed("app-text-color");
+    }
+  }
+
+  .nightMode {
+    color: $brand-nightMode;
+  }
+}
