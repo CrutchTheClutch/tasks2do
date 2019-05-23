@@ -12,7 +12,9 @@ import { isAuth } from './middleware';
   try {
     mongoose.Promise = global.Promise;
     
-    const DB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_ARGS}`;
+    const DB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${
+      process.env.DB_HOST
+    }/${process.env.DB_ARGS}`;
     mongoose.connect(DB_URI, { useNewUrlParser: true });
 
     mongoose.set('useFindAndModify', false);
@@ -20,7 +22,8 @@ import { isAuth } from './middleware';
     const app = express();
 
     const IN_PROD = process.env.NODE_ENV === 'production';
-    const ORIGIN = (IN_PROD ? "https://tasks2do-client.herokuapp.com" : "https://localhost:3000");
+    const BRANCH = (process.env.MASTER ? "https://tasks2do-client.herokuapp.com" : "https://tasks2do-client-dev.herokuapp.com")
+    const ORIGIN = (IN_PROD ? BRANCH : "https://localhost:3000");
 
     app.disable('x-powered-by');
     app.use(cors({

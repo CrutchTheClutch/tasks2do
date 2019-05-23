@@ -1,5 +1,4 @@
 import { verify } from 'jsonwebtoken';
-import { JWT_KEY } from '../config';
 
 const isAuth = (req, res, next) => {
   const authHeader = req.get('Authorization');
@@ -16,7 +15,7 @@ const isAuth = (req, res, next) => {
 
   let decodedToken;
   try {
-    decodedToken = verify(token, JWT_KEY);
+    decodedToken = verify(token, process.env.JWT_KEY);
   } catch (err) {
     req.isAuth = false;
     return next();

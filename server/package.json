@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node -r esm .",
-    "dev": "set NODE_ENV=development&& nodemon -r esm"
+    "dev": "set NODE_ENV=development && nodemon -r esm"
   },
   "author": "William Crutchfield",
   "license": "ISC",
