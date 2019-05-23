@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path'
 
-import { APP_PORT, DB_USER, DB_PASS, DB_HOST, DB_ARGS } from './config';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
 import { isAuth } from './middleware';
@@ -13,7 +12,7 @@ import { isAuth } from './middleware';
   try {
     mongoose.Promise = global.Promise;
     
-    const DB_URI = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_ARGS}`;
+    const DB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_ARGS}`;
     mongoose.connect(DB_URI, { useNewUrlParser: true });
 
     mongoose.set('useFindAndModify', false);
@@ -32,7 +31,7 @@ import { isAuth } from './middleware';
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      playground: true, // !IN_PROD,
+      playground: !IN_PROD,
       context: ({ req }) => ({
         isAuth: req.isAuth,
         userId: req.userId,
@@ -47,7 +46,7 @@ import { isAuth } from './middleware';
       res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
     });
 
-    app.listen({ port: process.env.PORT || 4000 }, () => (
+    app.listen({ port: process.env.PORT || process.env.APP_PORT || 4000 }, () => (
       console.log(`🚀  Server ready at http://localhost:4000${server.graphqlPath}`)
     ));
   } catch (e) {

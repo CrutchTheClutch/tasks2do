@@ -1,6 +1,7 @@
 {
   "name": "tasks2do-backend",
   "version": "1.0.0",
+  "main": "index.js",
   "private": true,
   "dependencies": {
     "apollo-server-express": "^2.4.8",
@@ -13,8 +14,8 @@
     "mongoose": "^5.5.2"
   },
   "scripts": {
-    "start": "set NODE_ENV=production && node -r esm",
-    "dev": "set NODE_ENV=development && nodemon -r esm"
+    "start": "NODE_ENV=production node -r esm .",
+    "dev": "set NODE_ENV=development&& nodemon -r esm"
   },
   "author": "William Crutchfield",
   "license": "ISC",
