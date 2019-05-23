@@ -28,7 +28,7 @@ import { isAuth } from './middleware';
           'https://www.tasks2do.com',
           'http://www.tasks2do.com',
         ]
-      : 'https://localhost:3000';
+      : 'http://localhost:3000';
 
     app.disable('x-powered-by');
     app.use(cors({
