@@ -52,7 +52,7 @@ class SettingsMenu extends Component<Props, {}> {
           {loggedIn ? (
             <MenuItem icon={<IoMdPerson className="icon" />} text={userName} />
           ) : (
-            <MenuItem icon={<IoMdPerson className="icon" />} text="Login" />
+            <MenuItem icon={<IoMdPerson className="icon" />} text="Guest" />
           )}
           <MenuItem
             icon={
