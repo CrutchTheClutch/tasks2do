@@ -13,8 +13,8 @@
     "mongoose": "^5.5.2"
   },
   "scripts": {
-    "build": "set NODE_ENV=production&& node -r esm",
-    "dev": "set NODE_ENV=development&& nodemon -r esm"
+    "start": "set NODE_ENV=production && node -r esm",
+    "dev": "set NODE_ENV=development && nodemon -r esm"
   },
   "author": "William Crutchfield",
   "license": "ISC",
