@@ -2,8 +2,8 @@ import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import path from 'path'
 
-import { APP_PORT, DB_USER, DB_PASS, DB_HOST, DB_ARGS, IN_PROD } from './config';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
 import { isAuth } from './middleware';
@@ -12,15 +12,23 @@ import { isAuth } from './middleware';
   try {
     mongoose.Promise = global.Promise;
     
-    const DB_URI = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_ARGS}`;
+    const DB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${
+      process.env.DB_HOST
+    }/${process.env.DB_ARGS}`;
     mongoose.connect(DB_URI, { useNewUrlParser: true });
 
     mongoose.set('useFindAndModify', false);
 
     const app = express();
 
+    const IN_PROD = process.env.NODE_ENV === 'production';
+    const BRANCH = (process.env.MASTER ? "https://tasks2do-client.herokuapp.com" : "https://tasks2do-client-dev.herokuapp.com")
+    const ORIGIN = (IN_PROD ? BRANCH : "https://localhost:3000");
+
     app.disable('x-powered-by');
-    app.use(cors());
+    app.use(cors({
+      origin: ORIGIN
+    }));
     app.use(isAuth);
 
     const server = new ApolloServer({
@@ -35,7 +43,13 @@ import { isAuth } from './middleware';
 
     server.applyMiddleware({ app });
 
-    app.listen({ port: APP_PORT }, () => (
+    app.use(express.static('public'));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+    });
+
+    app.listen({ port: process.env.PORT || process.env.APP_PORT || 4000 }, () => (
       console.log(`🚀  Server ready at http://localhost:4000${server.graphqlPath}`)
     ));
   } catch (e) {
