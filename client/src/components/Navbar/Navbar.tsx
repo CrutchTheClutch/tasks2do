@@ -1,20 +1,12 @@
 import * as React from 'react';
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import { FaTasks } from 'react-icons/fa';
 import { IoMdAdd, IoMdSettings } from 'react-icons/io';
 import UserNameQuery from '../../providers/UserNameQuery';
+import { CREATE_TASK_MUTATION } from '../../graphql/mutations';
 import CustomButton from '../CustomButton';
 import SettingsMenu from '../SettingsMenu';
 import './Navbar.scss';
-
-const CREATE_DUMMY_TASK_MUTATION = gql`
-  mutation CreateDummyTaskMutation($name: String!, $dueDate: String) {
-    createTask(name: $name, dueDate: $dueDate) {
-      id
-    }
-  }
-`;
 
 interface Props {
   name?: string;
@@ -67,7 +59,7 @@ class Navbar extends React.Component<Props, State> {
         <div className="col-5 col-sm-3 col-md-3 p-0 text-right">
           {loggedIn ? (
             <Mutation
-              mutation={CREATE_DUMMY_TASK_MUTATION}
+              mutation={CREATE_TASK_MUTATION}
               variables={{ name, dueDate }}
             >
               {(createDummyTaskMutation: Function): JSX.Element | null => (
