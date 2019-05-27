@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { IoIosMoon, IoMdArrowDropup, IoMdPerson } from 'react-icons/io';
+import { UserNameQueryProps } from '../../providers/UserNameQuery';
 import MenuItem from '../MenuItem';
 import './SettingsMenu.scss';
 
-interface Props {
+interface Props extends Partial<UserNameQueryProps> {
   isOpen?: boolean;
   loggedIn?: boolean;
   nightMode?: boolean;
   updateTheme: Function;
-  userName: string;
 }
 
 class SettingsMenu extends Component<Props, {}> {
@@ -22,6 +22,50 @@ class SettingsMenu extends Component<Props, {}> {
   public constructor(props: Props) {
     super(props);
     this.toggleNightMode = this.toggleNightMode.bind(this);
+  }
+
+  /**
+   * Sets the userName within the SettingsMenu
+   *
+   * Uses data from UserNameQuery.
+   */
+  public setUserMenuItem(): JSX.Element {
+    const { loggedIn, loading, error, data } = this.props;
+
+    let userMenuItem;
+
+    if (loading) {
+      userMenuItem = (
+        <MenuItem icon={<IoMdPerson className="icon" />} text="Loading..." />
+      );
+    }
+
+    if (error) {
+      userMenuItem = (
+        <MenuItem icon={<IoMdPerson className="icon" />} text="ERROR" />
+      );
+    }
+
+    if (!loggedIn) {
+      userMenuItem = (
+        <MenuItem icon={<IoMdPerson className="icon" />} text="Guest" />
+      );
+    }
+
+    if (!userMenuItem && data) {
+      userMenuItem = (
+        <MenuItem
+          icon={<IoMdPerson className="icon" />}
+          text={data.user.name}
+        />
+      );
+    }
+
+    if (userMenuItem) {
+      return userMenuItem;
+    }
+
+    return <MenuItem icon={<IoMdPerson className="icon" />} text="UNDEFINED" />;
   }
 
   /**
@@ -39,7 +83,8 @@ class SettingsMenu extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { isOpen, loggedIn, nightMode, userName } = this.props;
+    const { isOpen, nightMode } = this.props;
+
     return (
       <React.Fragment>
         <div
@@ -49,11 +94,7 @@ class SettingsMenu extends Component<Props, {}> {
         >
           <IoMdArrowDropup className="dropdown-caret outline" />
           <IoMdArrowDropup className="dropdown-caret fill" />
-          {loggedIn ? (
-            <MenuItem icon={<IoMdPerson className="icon" />} text={userName} />
-          ) : (
-            <MenuItem icon={<IoMdPerson className="icon" />} text="Guest" />
-          )}
+          <React.Fragment>{this.setUserMenuItem()}</React.Fragment>
           <MenuItem
             icon={
               <IoIosMoon className={`icon${nightMode ? ' nightMode' : ''}`} />
