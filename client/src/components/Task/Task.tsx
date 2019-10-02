@@ -6,17 +6,9 @@ import {
 } from 'react-icons/io';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
-
+import { DELETE_TASK_MUTATION } from '../../graphql/mutations';
 import CustomButton from '../CustomButton';
 import './Task.scss';
-
-const DELETE_TASK_MUTATION = gql`
-  mutation DeleteTaskMutation($id: ID!) {
-    deleteTask(id: $id) {
-      id
-    }
-  }
-`;
 
 interface Props {
   id: string;

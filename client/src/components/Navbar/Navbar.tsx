@@ -62,10 +62,10 @@ class Navbar extends React.Component<Props, State> {
               mutation={CREATE_TASK_MUTATION}
               variables={{ name, dueDate }}
             >
-              {(createDummyTaskMutation: Function): JSX.Element | null => (
+              {(createTaskMutation: Function): JSX.Element | null => (
                 <CustomButton
                   content={<IoMdAdd className="icon" />}
-                  onClick={createDummyTaskMutation}
+                  onClick={createTaskMutation}
                 />
               )}
             </Mutation>
