@@ -3,22 +3,9 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import moment from 'moment';
 import { ApolloError } from 'apollo-boost';
+import { TASKS_QUERY } from '../../graphql/queries';
 import Task from '../Task';
 import './TaskList.scss';
-
-const TASKS_QUERY = gql`
-  query TasksQuery {
-    user(id: "5cd7f0d68ec310afd9a2f7a5") {
-      id
-      tasks {
-        id
-        name
-        completed
-        dueDate
-      }
-    }
-  }
-`;
 
 class TaskList extends Component {
   public static convertDate(dueDate: string): string {
