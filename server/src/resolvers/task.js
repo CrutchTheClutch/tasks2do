@@ -27,10 +27,16 @@ export default {
       //   throw new Error('Unauthenticated!');
       // }
 
-      const task = await Task.findById(id);
+      let status;
 
-      await Task.findOneAndUpdate(id, {
-        $set: { completed: !completed }
+      if (completed === true) {
+        status = false;
+      } else {
+        status = true;
+      }
+
+      const task = await Task.findByIdAndUpdate(id, {
+        $set: { completed: status }
       })
 
       return task

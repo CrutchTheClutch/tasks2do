@@ -15,3 +15,11 @@ export const DELETE_TASK_MUTATION = gql`
     }
   }
 `;
+
+export const TOGGLE_TASK_COMPLETED_MUTATION = gql`
+  mutation ToggleTaskCompletedMutation($id: ID!, $completed: Boolean!) {
+    toggleTaskCompleted(id: $id, completed: $completed) {
+      id
+    }
+  }
+`;
