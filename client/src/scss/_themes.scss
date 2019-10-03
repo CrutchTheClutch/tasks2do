@@ -15,7 +15,8 @@ $themes: (
     app-link-hover-color: $light-app-link-color-hover,
     navbar-bg: $light-navbar-bg,
     footer-bg: $light-footer-bg,
-    footer-text-color: $light-footer-text-color
+    footer-text-color: $light-footer-text-color,
+    newTask-bg: $light-newTask-bg,
   ),
   dark: (
     app-bg: $dark-app-bg,
@@ -24,6 +25,7 @@ $themes: (
     app-link-hover-color: $dark-app-link-color-hover,
     navbar-bg: $dark-navbar-bg,
     footer-bg: $dark-footer-bg,
-    footer-text-color: $dark-footer-text-color
+    footer-text-color: $dark-footer-text-color,
+    newTask-bg: $dark-newTask-bg,
   )
 );

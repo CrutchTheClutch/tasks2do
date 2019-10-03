@@ -1,0 +1,7 @@
+@import "../../scss/themes";
+
+.newTask {
+  @include theme($themes) {
+    background-color: themed("footer-bg");
+  }
+}

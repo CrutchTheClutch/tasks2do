@@ -144,6 +144,9 @@ $light-navbar-bg: $grey-100;
 $light-footer-bg: darken($light-navbar-bg, 10%);
 $light-footer-text-color: darken($light-app-text-color, 25%);
 
+// NewTask Colors
+$light-newTask-bg: darken($light-navbar-bg, 10%);
+
 /**
 * Dark Theme
 */
@@ -161,3 +164,6 @@ $dark-navbar-bg: $grey-900;
 // Footer Colors
 $dark-footer-bg: darken($dark-navbar-bg, 10%);
 $dark-footer-text-color: darken($dark-app-text-color, 25%);
+
+// NewTask Colors
+$dark-newTask-bg: darken($dark-navbar-bg, 10%);
