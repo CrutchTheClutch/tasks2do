@@ -1,11 +1,12 @@
-@import "../../scss/themes";
+@import '../../scss/themes';
 
 .navbar {
   min-height: $navbar-min-height;
   padding: $navbar-padding;
+  z-index: 2;
 
   @include theme($themes) {
-    background-color: themed("navbar-bg");
+    background-color: themed('navbar-bg');
   }
 
   .logo {
