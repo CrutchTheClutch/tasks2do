@@ -90,6 +90,14 @@ $task-done-opacity: 0.3;
 $task-date-font-size: 0.775em;
 
 /**
+* Add Task Modal Items
+*
+* Modal settings for task creation.
+*/
+$addTaskPosLeft: 4%;
+$addTaskWidth: 92%;
+
+/**
 * Footer
 *
 * Footer settings.
@@ -145,7 +153,8 @@ $light-footer-bg: darken($light-navbar-bg, 10%);
 $light-footer-text-color: darken($light-app-text-color, 25%);
 
 // NewTask Colors
-$light-newTask-bg: darken($light-navbar-bg, 10%);
+$light-newTask-modal-bg: $light-navbar-bg;
+$light-newTask-bg: rgba(lighten($light-navbar-bg, 10%), 0.75);
 
 /**
 * Dark Theme
@@ -166,4 +175,5 @@ $dark-footer-bg: darken($dark-navbar-bg, 10%);
 $dark-footer-text-color: darken($dark-app-text-color, 25%);
 
 // NewTask Colors
-$dark-newTask-bg: darken($dark-navbar-bg, 10%);
+$dark-newTask-bg: rgba(darken($dark-navbar-bg, 10%), 0.75);
+$dark-newTask-modal-bg: $dark-navbar-bg;

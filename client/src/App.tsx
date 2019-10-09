@@ -9,6 +9,7 @@ interface Props {
 }
 
 interface State {
+  addTaskVisible: boolean;
   loggedIn: boolean;
   nightMode: boolean;
   themeName: string;
@@ -22,7 +23,9 @@ class App extends React.Component<Props, State> {
   public constructor(props: Props) {
     super(props);
     this.updateTheme = this.updateTheme.bind(this);
+    this.toggleAddTask = this.toggleAddTask.bind(this);
     this.state = {
+      addTaskVisible: false,
       loggedIn: true,
       nightMode: false,
       themeName: 'dark',
@@ -66,20 +69,26 @@ class App extends React.Component<Props, State> {
     }
   }
 
+  public toggleAddTask(): void {
+    const { addTaskVisible } = this.state;
+    this.setState({
+      addTaskVisible: !addTaskVisible,
+    });
+  }
+
   public render(): JSX.Element {
-    const { loggedIn, nightMode } = this.state;
+    const { loggedIn, nightMode, addTaskVisible } = this.state;
 
     return (
       <main id="app-root" className="d-flex flex-column">
         <Navbar
+          toggleAddTask={this.toggleAddTask}
           loggedIn={loggedIn}
           nightMode={nightMode}
           // login={this.login}
           updateTheme={this.updateTheme}
         />
-        <div className="p-0 flex-grow-1">
-          <TaskList />
-        </div>
+        <TaskList addTaskVisible={addTaskVisible} toggleAddTask={this.toggleAddTask} />
         <Footer />
       </main>
     );

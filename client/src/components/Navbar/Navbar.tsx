@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { Mutation } from 'react-apollo';
 import { FaTasks } from 'react-icons/fa';
 import { IoMdAdd, IoMdSettings } from 'react-icons/io';
 import UserNameQuery from '../../providers/UserNameQuery';
-import { CREATE_TASK_MUTATION } from '../../graphql/mutations';
 import CustomButton from '../CustomButton';
 import SettingsMenu from '../SettingsMenu';
 import './Navbar.scss';
@@ -11,6 +9,7 @@ import './Navbar.scss';
 interface Props {
   name?: string;
   dueDate?: string;
+  toggleAddTask: Function;
   loggedIn: boolean;
   nightMode: boolean;
   updateTheme: Function;
@@ -42,7 +41,7 @@ class Navbar extends React.Component<Props, State> {
   }
 
   public render(): JSX.Element {
-    const { name, dueDate, loggedIn, nightMode, updateTheme } = this.props;
+    const { loggedIn, nightMode, updateTheme, toggleAddTask } = this.props;
     const { isOpen } = this.state;
 
     return (
@@ -58,17 +57,10 @@ class Navbar extends React.Component<Props, State> {
         <div className="d-none d-sm-block col-sm-6 col-md-6 p-0" />
         <div className="col-5 col-sm-3 col-md-3 p-0 text-right">
           {loggedIn ? (
-            <Mutation
-              mutation={CREATE_TASK_MUTATION}
-              variables={{ name, dueDate }}
-            >
-              {(createTaskMutation: Function): JSX.Element | null => (
-                <CustomButton
-                  content={<IoMdAdd className="icon" />}
-                  onClick={createTaskMutation}
-                />
-              )}
-            </Mutation>
+            <CustomButton
+              content={<IoMdAdd className="icon" />}
+              onClick={toggleAddTask}
+            />
           ) : null}
           <CustomButton
             content={<IoMdSettings className="icon" />}

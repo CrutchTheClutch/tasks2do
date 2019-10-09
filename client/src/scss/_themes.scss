@@ -1,6 +1,6 @@
-@import "./mixins/theme.scss";
-@import "./utilities/text.scss";
-@import "./variables.scss";
+@import './mixins/theme.scss';
+@import './utilities/text.scss';
+@import './variables.scss';
 
 /* Theme System
 *  
@@ -17,6 +17,7 @@ $themes: (
     footer-bg: $light-footer-bg,
     footer-text-color: $light-footer-text-color,
     newTask-bg: $light-newTask-bg,
+    newTask-modal-bg: $light-newTask-modal-bg
   ),
   dark: (
     app-bg: $dark-app-bg,
@@ -27,5 +28,6 @@ $themes: (
     footer-bg: $dark-footer-bg,
     footer-text-color: $dark-footer-text-color,
     newTask-bg: $dark-newTask-bg,
+    newTask-modal-bg: $dark-newTask-modal-bg
   )
 );
