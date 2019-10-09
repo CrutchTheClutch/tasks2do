@@ -4,9 +4,12 @@ import {
   IoIosRadioButtonOff,
   IoMdCloseCircle,
 } from 'react-icons/io';
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
-import { DELETE_TASK_MUTATION } from '../../graphql/mutations';
+import {
+  DELETE_TASK_MUTATION,
+  TOGGLE_TASK_COMPLETED_MUTATION,
+} from '../../graphql/mutations';
+import moment from 'moment';
 import CustomButton from '../CustomButton';
 import './Task.scss';
 
@@ -14,12 +17,14 @@ interface Props {
   id: string;
   completed: boolean;
   taskName: string;
-  dueDate?: string;
+  dueDate: string;
 }
 
 interface State {
   completed: boolean;
   hover: boolean;
+  del: boolean;
+  overdue: boolean;
 }
 
 class Task extends Component<Props, State> {
@@ -32,9 +37,12 @@ class Task extends Component<Props, State> {
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.enableHover = this.enableHover.bind(this);
     this.disableHover = this.disableHover.bind(this);
+    this.del = this.del.bind(this);
     this.state = {
       completed: this.props.completed,
       hover: false,
+      del: false,
+      overdue: false,
     };
   }
 
@@ -57,46 +65,78 @@ class Task extends Component<Props, State> {
     });
   }
 
+  public del(): void {
+    this.setState({
+      del: true,
+    });
+  }
+
+  public componentWillMount() {
+    const { dueDate } = this.props;
+    const myDate = new Date(dueDate);
+    const today = new Date(moment().format("YYYY/MM/DD"));
+
+    if (myDate < today) {
+      this.setState({
+        overdue: true,
+      })
+    }
+  }
+
   public render(): JSX.Element {
     const { id, taskName, dueDate } = this.props;
-    const { completed, hover } = this.state;
+    const { completed, del, hover, overdue } = this.state;
 
-    return (
-      <div
-        className={`task row no-gutters align-items-center ${
-          completed ? '' : 'tasks2do'
-        }`}
-        onMouseEnter={this.enableHover}
-        onMouseLeave={this.disableHover}
-      >
-        <CustomButton
-          className="completed"
-          content={
-            completed ? (
-              <IoMdCheckmarkCircle className="icon text-brand-primary" />
-            ) : (
-              <IoIosRadioButtonOff className="icon" />
-            )
-          }
-          onClick={this.toggleCompleted}
-        />
-        <div className="taskName col flex-grow-1">{taskName}</div>
-
-        {!hover ? (
-          <div className="dueDate col-auto">{dueDate}</div>
-        ) : (
-          <Mutation mutation={DELETE_TASK_MUTATION} variables={{ id }}>
-            {(deleteTaskMutation: Function): JSX.Element => (
+    return del ? (
+      <React.Fragment />
+    ) : (
+        <div
+          className={`task row no-gutters align-items-center ${
+            completed ? '' : 'tasks2do'
+            }`}
+          onMouseEnter={this.enableHover}
+          onMouseLeave={this.disableHover}
+        >
+          <Mutation
+            mutation={TOGGLE_TASK_COMPLETED_MUTATION}
+            variables={{ id, completed }}
+            onCompleted={this.toggleCompleted}
+          >
+            {(toggleTaskCompleted: Function): JSX.Element => (
               <CustomButton
                 className="completed"
-                content={<IoMdCloseCircle className="icon" />}
-                onClick={deleteTaskMutation}
+                content={
+                  completed ? (
+                    <IoMdCheckmarkCircle className="icon text-brand-primary" />
+                  ) : (
+                      <IoIosRadioButtonOff className="icon" />
+                    )
+                }
+                onClick={toggleTaskCompleted}
               />
             )}
           </Mutation>
-        )}
-      </div>
-    );
+          <div className="taskName col flex-grow-1">{taskName}</div>
+
+          {!hover ? (
+            <div className={`dueDate col-auto ${overdue ? 'overdue' : ''}`}>{dueDate}</div>
+          ) : (
+              <Mutation
+                mutation={DELETE_TASK_MUTATION}
+                variables={{ id }}
+                onCompleted={this.del}
+              >
+                {(deleteTaskMutation: Function): JSX.Element => (
+                  <CustomButton
+                    className="completed"
+                    content={<IoMdCloseCircle className="icon" />}
+                    onClick={deleteTaskMutation}
+                  />
+                )}
+              </Mutation>
+            )}
+        </div>
+      );
   }
 }
 
