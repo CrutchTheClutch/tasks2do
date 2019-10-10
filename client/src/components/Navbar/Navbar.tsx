@@ -1,33 +1,15 @@
 import * as React from 'react';
-import { ApolloError } from 'apollo-boost';
-import gql from 'graphql-tag';
-import { Mutation, Query } from 'react-apollo';
 import { FaTasks } from 'react-icons/fa';
 import { IoMdAdd, IoMdSettings } from 'react-icons/io';
+import UserNameQuery from '../../providers/UserNameQuery';
 import CustomButton from '../CustomButton';
-import SettingsMenu from '../SettingsMenu/SettingsMenu';
+import SettingsMenu from '../SettingsMenu';
 import './Navbar.scss';
-
-const USER_NAME_QUERY = gql`
-  query UserNameQuery {
-    user(id: "5cd7f0d68ec310afd9a2f7a5") {
-      id
-      name
-    }
-  }
-`;
-
-const CREATE_DUMMY_TASK_MUTATION = gql`
-  mutation CreateDummyTaskMutation($name: String!, $dueDate: String) {
-    createTask(name: $name, dueDate: $dueDate) {
-      id
-    }
-  }
-`;
 
 interface Props {
   name?: string;
   dueDate?: string;
+  toggleAddTask: Function;
   loggedIn: boolean;
   nightMode: boolean;
   updateTheme: Function;
@@ -59,7 +41,7 @@ class Navbar extends React.Component<Props, State> {
   }
 
   public render(): JSX.Element {
-    const { name, dueDate, loggedIn, nightMode, updateTheme } = this.props;
+    const { loggedIn, nightMode, updateTheme, toggleAddTask } = this.props;
     const { isOpen } = this.state;
 
     return (
@@ -75,45 +57,23 @@ class Navbar extends React.Component<Props, State> {
         <div className="d-none d-sm-block col-sm-6 col-md-6 p-0" />
         <div className="col-5 col-sm-3 col-md-3 p-0 text-right">
           {loggedIn ? (
-            <Mutation
-              mutation={CREATE_DUMMY_TASK_MUTATION}
-              variables={{ name, dueDate }}
-            >
-              {(createDummyTaskMutation: Function): JSX.Element | null => (
-                <CustomButton
-                  content={<IoMdAdd className="icon" />}
-                  onClick={createDummyTaskMutation}
-                />
-              )}
-            </Mutation>
+            <CustomButton
+              content={<IoMdAdd className="icon" />}
+              onClick={toggleAddTask}
+            />
           ) : null}
           <CustomButton
             content={<IoMdSettings className="icon" />}
             onClick={this.toggleSettingsMenu}
           />
-          <Query query={USER_NAME_QUERY}>
-            {({
-              loading,
-              error,
-              data,
-            }: {
-              loading: boolean;
-              error?: ApolloError;
-              data: any;
-            }): JSX.Element => {
-              if (loading) return <h4>Loading...</h4>;
-              if (error) return <h4>Error</h4>;
-              return (
-                <SettingsMenu
-                  isOpen={isOpen}
-                  loggedIn={loggedIn}
-                  nightMode={nightMode}
-                  updateTheme={updateTheme}
-                  userName={data.user.name}
-                />
-              );
-            }}
-          </Query>
+          <UserNameQuery>
+            <SettingsMenu
+              isOpen={isOpen}
+              loggedIn={loggedIn}
+              nightMode={nightMode}
+              updateTheme={updateTheme}
+            />
+          </UserNameQuery>
         </div>
       </div>
     );
