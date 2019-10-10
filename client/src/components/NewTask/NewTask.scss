@@ -22,6 +22,7 @@
     border-radius: 20px;
     padding: 20px;
     min-width: 245px;
+    max-width: 750px;
 
     @include theme($themes) {
       background-color: themed('newTask-modal-bg');
@@ -86,7 +87,7 @@
   &.addTaskBtn {
     position: absolute;
     top: 192px;
-
+    left: $addTaskPosLeft;
     @include theme($themes) {
       color: themed('app-text-color') !important;
     }
